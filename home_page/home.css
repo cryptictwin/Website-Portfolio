@@ -1,15 +1,13 @@
 .user-info {
     position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
+    top: 40%;
     margin-left: 100px;
     color: white;
-    font-size: 3em;
-}
-
-.user-info h6 {
+    font-size: 3vw;
     width: 50%;
 }
+
+
 
 .title {
     display: flex;

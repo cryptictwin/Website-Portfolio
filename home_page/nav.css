@@ -13,12 +13,8 @@ body {
 
 header {
     display: flex;
-    padding: 30px 0px;
+    padding: 30px;
     justify-content: flex-end;
-}
-
-h1 {
-    color: ;
 }
 
 #toggle-1 {
@@ -55,7 +51,7 @@ nav ul li a {
     text-decoration: none;
     color: #ffffff;
     font-weight: 800;
-    font-size: 1.5em;
+    font-size: 1.5vw;
     letter-spacing: ;
     padding: 0px 20px;
     transition: all 0.2s ease 0s;
