@@ -1,0 +1,146 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "IBM Plex Sans";
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(images/zwartevilt.png);
+    background-repeat: repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+ /* body > * {
+    display: flex;     enables random script message on webpage for some unknown reason
+}              */
+
+header {
+    display: flex;
+    padding: 30px 30px 0px 30px;
+    justify-content: flex-end;
+    width: 100%;
+    background-repeat: repeat;
+    margin-bottom: auto;
+}
+
+#toggle-1 {
+    display: none;
+}
+
+.toggle-menu {
+    display: none;
+}
+
+.line {
+    display: block;
+    height: 5px;
+    width: 30px;
+    margin: 5px;
+    background-color: #edf2f4;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    list-style: none;
+    transition: all 0.2s;
+}
+
+nav ul li:last-child {
+    margin-right: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #edf2f4;
+    font-weight: 800;
+    font-size: 2em;
+    padding: 0px 20px;
+    transition: all 0.2s ease 0s;
+}
+
+nav ul li:nth-child(2) a{
+    opacity: 1;
+    color: #7ebbd7;
+}
+
+nav ul li a:hover {
+    color: #7ebbd7;
+}
+
+nav ul li:hover {
+    transform: scale(1.1);
+}
+
+@media only screen and (max-width: 700px) {
+    .toggle-menu {
+        display: inline-block;
+        float: none;
+    }
+    nav {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+span {
+    color: #d90429;
+    font-weight: 800;
+}
+
+footer {
+    display: flex;
+    color: #d90429;
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+}
+
+footer section h3 {
+    font-size: 2em;
+}
+
+footer section ul {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 20px
+}
+
+footer section ul li {
+    display: bloc;
+    background-color: #000101;
+    padding: 10px 16px;
+    border-radius: 50%;
+}
+
+footer section ul li a {
+    font-size: 30px;
+    color: white;
+}
+
+footer section ul li a i {
+    transition: all 0.5s ease 0s;
+}
+
+footer section ul li:hover i {
+    transform: scale(1.1);
+    color: #8ecae6;
+}
+
