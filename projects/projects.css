@@ -59,7 +59,7 @@ nav ul li a {
     text-decoration: none;
     color: #edf2f4;
     font-weight: 800;
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 0px 20px;
     transition: all 0.2s ease 0s;
 }
@@ -88,8 +88,66 @@ nav ul li:hover {
 }
 
 
+.overview {
+    color: #edf2f4;
+    font-size: 2.3em;
+    width: 70%;
+    text-align: center;
+    align-self: center;
+    margin: 100px auto;
+    padding: 10px;
+}
 
+.overview .title {
+    display: flex;
+    color: #7ebbd7;
+    justify-content: center;
+}
 
+@media only screen and (max-width: 500px) {
+    .overview {
+        font-size: 2em;
+    } 
+}
+
+@media only screen and (max-width: 380px) {
+    .overview {
+        font-size: 1.6em;
+    } 
+}
+
+@media only screen and (max-width: 320px) {
+    .overview {
+        font-size: 1.3em;
+    } 
+}
+
+main section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 150px;
+    margin: 100px auto;
+    width: 40%;
+}
+.project {
+    background-color: #000101;
+    width: 300px;
+    height: 350px;
+}
+
+.one {
+    align-self: flex-start;
+}
+
+.two {
+    align-self: flex-end;
+}
+
+.three {
+    align-self: flex-start;
+}
 
 
 
