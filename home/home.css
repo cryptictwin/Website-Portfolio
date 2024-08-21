@@ -1,22 +1,101 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "IBM Plex Sans";
+}
+
+body {
+    background-image: url(images/zwartevilt.png);
+    background-repeat: repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* body > * {
+    display: flex;     enables random script message on webpage for some unknown reason
+} */                 
+
+header {
+    display: flex;
+    padding: 30px;
+    justify-content: flex-end;
+    width: 100%;
+    background-image: url(images/tactile_noise.webp);
+    background-repeat: repeat;
+
+}
+
+#toggle-1 {
+    display: none;
+}
+
+.toggle-menu {
+    display: none;
+}
+
+.line {
+    display: block;
+    height: 5px;
+    width: 30px;
+    margin: 5px;
+    background-color: #edf2f4;
+}
+
+nav {
+    padding-right: 50px;
+}
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    list-style: none;
+    transition: all 0.2s;
+}
+
+nav ul li:last-child {
+    margin-right: 30px;
+    border: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #edf2f4;
+    font-weight: 800;
+    font-size: 2em;
+    padding: 0px 20px;
+    transition: all 0.2s ease 0s;
+}
+
+nav ul li a:hover {
+    color: #8ecae6;
+}
+
+nav ul li:hover {
+    transform: scale(1.2);
+}
+
+@media only screen and (max-width: 700px) {
+    .toggle-menu {
+        display: inline-block;
+        float: none;
+        margin-right: 50px;
+    }
+    nav {
+        display: none;
+    }
+}
+
 .user {
     color: #edf2f4;
     font-size: 3em;
     width: 60%;
-    position: relative;
-    top: 300px;
-    left: 50px;
-    margin-bottom: 300px;
+    
+    
 }
 
-.projects {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
 
-.projects div {
-    width: 50%;
-}
 .title {
     display: flex;
     color: #d90429;
@@ -79,4 +158,14 @@
 span {
     color: #8ecae6;
 }
+
+footer {
+    display: flex;
+    margin-top: auto;
+    background-color: #8ecae6;
+    width: 100%;
+    justify-content: center;
+}
+
+footer section
 
