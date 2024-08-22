@@ -1,118 +1,56 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    font-family: "IBM Plex Sans";
-    box-sizing: border-box;
-}
+@import url(/assets/global_files/global.css);
 
-body {
-    background-image: url(images/zwartevilt.png);
-    background-repeat: repeat;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+@import url(/assets/global_files/typography.css);
 
- /* body > * {
-    display: flex;     enables random script message on webpage for some unknown reason
-}              */
-
-header {
-    display: flex;
-    padding: 30px 30px 0px 30px;
-    justify-content: flex-end;
-    width: 100%;
-    background-repeat: repeat;
-    margin-bottom: auto;
-}
-
-#toggle-1 {
-    display: none;
-}
-
-.toggle-menu {
-    display: none;
-}
-
-.line {
-    display: block;
-    height: 5px;
-    width: 30px;
-    margin: 5px;
-    background-color: #edf2f4;
-}
-
-nav ul {
-    display: flex;
-}
-
-nav ul li {
-    list-style: none;
-    transition: all 0.2s;
-}
-
-nav ul li:last-child {
-    margin-right: 30px;
-}
-
-nav ul li a {
-    text-decoration: none;
+.overview {
     color: #edf2f4;
-    font-weight: 800;
-    font-size: 1.5em;
-    padding: 0px 20px;
-    transition: all 0.2s ease 0s;
-}
-
-nav ul li:first-child a {
-    opacity: 1;
-    color: #7ebbd7;
-}
-
-nav ul li a:hover {
-    color: #7ebbd7;
-}
-
-nav ul li:hover {
-    transform: scale(1.1);
-}
-
-@media only screen and (max-width: 700px) {
-    .toggle-menu {
-        display: inline-block;
-        float: none;
-    }
-    nav {
-        display: none;
-    }
-}
-
-.user-overview {
-    color: #edf2f4;
-    font-size: 3em;
     width: 70%;
+    font-size: 2.2em;
     text-align: center;
     align-self: center;
-    margin: 100px 0px;
+    margin: 100px auto;
 }
 
-.user-overview h6 {
-    font-weight: 400;
-}
-
-.title {
+.overview .title {
     display: flex;
     color: #7ebbd7;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
-.title div h1 {
-    -webkit-text-stroke: white 1px;
-}
-
-.name {
+.overview .title span {
     display: flex;
+}
+.overview h6 {
+    font-weight: 400;
+}
+
+.title h1 {
+    -webkit-text-stroke: white 0.5px;
+}
+
+.title h1:nth-child(5) {
+    margin-right: 0.5em;
+}
+
+@media only screen and (max-width: 500px) {
+    .title {
+        flex-wrap: wrap;
+    }
+    .title h1:nth-child(5) {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .overview {
+        font-size: 2em;
+    } 
+}
+
+@media only screen and (max-width: 320px) {
+    .overview {
+        font-size: 1.8em;
+    } 
 }
 
 @keyframes flicker {
@@ -129,86 +67,44 @@ nav ul li:hover {
 @keyframes swing {
 
 }
-.first h1:nth-child(1) {
-    animation: flicker 6s ease-in-out 7.75s infinite alternate both;
+.title h1:nth-child(1) {
+
+    animation: flicker 6s ease-in-out 10s infinite alternate both;
 }
 
-.first h1:nth-child(2) {
+.title h1:nth-child(2) {
     animation: flicker 6s ease-in-out 2.75s infinite alternate both;
 }
 
-.first h1:nth-child(3) {
-    animation: flicker 6s ease-in-out 7.41s infinite alternate both;
+.title h1:nth-child(3) {
+    animation: flicker 6s ease-in-out 47.41s infinite alternate both;
 }
 
-.first h1:nth-child(4) {
-    animation: flicker 6s ease-in-out 7.75s infinite alternate both;
+.title h1:nth-child(4) {
+    animation: flicker 6s ease-in-out 37.75s infinite alternate both;
 }
 
-.first h1:nth-child(5) {
-    animation: flicker 6s ease-in-out 8.94s infinite alternate both;
+.title h1:nth-child(5) {
+    animation: flicker 6s ease-in-out 18.94s infinite alternate both;
 }
 
-.last h1:nth-child(1) {
+.title h1:nth-child(6) {
     animation: flicker 6s ease-in-out 4.47s infinite alternate both;
 }
 
-.last h1:nth-child(2) {
-    animation: flicker 6s ease-in-out 6.6s infinite alternate both;
+.title h1:nth-child(7) {
+    animation: flicker 6s ease-in-out 36.6s infinite alternate both;
 }
 
-.last h1:nth-child(3) {
-    animation: flicker 6s ease-in-out 3.81s infinite alternate both;
+.title h1:nth-child(8) {
+    animation: flicker 6s ease-in-out 63.81s infinite alternate both;
 }
 
-.last h1:nth-child(4) {
-    animation: flicker 6s ease-in-out 6.39s infinite alternate both;
+.title h1:nth-child(9) {
+    animation: flicker 6s ease-in-out 26.39s infinite alternate both;
 }
 
-span {
+.overview h6 span {
     color: #d90429;
     font-weight: 800;
 }
-
-footer {
-    display: flex;
-    color: #d90429;
-    width: 100%;
-    justify-content: center;
-    margin-top: auto;
-}
-
-footer section h3 {
-    font-size: 2em;
-}
-
-footer section ul {
-    list-style: none;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-bottom: 30px;
-    gap: 20px
-}
-
-footer section ul li {
-    display: bloc;
-    background-color: #000101;
-    padding: 10px 16px;
-    border-radius: 50%;
-}
-
-footer section ul li a {
-    font-size: 30px;
-    color: white;
-}
-
-footer section ul li a i {
-    transition: all 0.5s ease 0s;
-}
-
-footer section ul li:hover i {
-    transform: scale(1.1);
-    color: #8ecae6;
-}
-
