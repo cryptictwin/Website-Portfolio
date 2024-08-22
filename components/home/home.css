@@ -1,11 +1,12 @@
 @import url(/assets/global_files/global.css);
 
-@import url(/assets/global_files/typography.css);
+
 
 .overview {
     color: #edf2f4;
-    width: 70%;
-    font-size: 2.2em;
+    width: 50%;
+    font-size: 3em;
+    font-weight: 700;
     text-align: center;
     align-self: center;
     margin: 100px auto;
@@ -21,15 +22,18 @@
     display: flex;
 }
 .overview h6 {
-    font-weight: 400;
+    font-weight: 900;
 }
 
-.title h1 {
-    -webkit-text-stroke: white 0.5px;
-}
 
 .title h1:nth-child(5) {
     margin-right: 0.5em;
+}
+
+@media only screen and (max-width: 650px) {
+    .overview {
+        font-size: 2.5em;
+    } 
 }
 
 @media only screen and (max-width: 500px) {
@@ -41,15 +45,15 @@
     }
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 340px) {
     .overview {
-        font-size: 2em;
+        font-size: 2.3em;
     } 
 }
 
 @media only screen and (max-width: 320px) {
     .overview {
-        font-size: 1.8em;
+        font-size: 2.1em;
     } 
 }
 
@@ -106,5 +110,5 @@
 
 .overview h6 span {
     color: #d90429;
-    font-weight: 800;
+    /* font-weight: 900; */
 }

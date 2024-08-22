@@ -1,24 +1,21 @@
 @import url(/assets/global_files/global.css);
 
-@import url(/assets/global_files/typography.css);
 
 .overview {
     color: #edf2f4;
     width: 70%;
-    font-size: 2.2em;
+    font-size: 3em;
+    font-weight:;
     text-align: center;
     align-self: center;
     margin: 100px auto;
 }
 
 .overview .title {
+    font-weight: 200;
     display: flex;
     color: #7ebbd7;
     justify-content: center;
-}
-
-.title h1 {
-    -webkit-text-stroke: white 1px;
 }
 
 @media only screen and (max-width: 500px) {
@@ -93,7 +90,7 @@ main section{
     justify-content: center;
     row-gap: 150px;
     margin: 100px auto;
-    width: 60%;
+    width: 40%;
 }
 .card {
     background-color: #0000006f;

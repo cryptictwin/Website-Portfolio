@@ -1,40 +1,90 @@
-@font-face {
+ @font-face {
     font-family: "IBMPlexSans";
-    src: url(/assets/fonts/IBMPlexSans-Bold.woff) format("woff");
+    src: url(/assets/fonts/ibm-plexsans/IBMPlexSans-Bold.woff) format("woff");
     font-weight: 700;
 }
 
 @font-face {
     font-family: "IBMPlexSans";
-    src: url(/assets/fonts/IBMPlexSans-ExtraLight.woff) format("woff");
+    src: url(/assets/fonts/ibm-plexsans/IBMPlexSans-ExtraLight.woff) format("woff");
     font-weight: 200;
 }
 
 @font-face {
     font-family: "IBMPlexSans";
-    src: url(/assets/fonts/IBMPlexSans-Light.woff) format("woff");
+    src: url(/assets/fonts/ibm-plexsans/IBMPlexSans-Light.woff) format("woff");
     font-weight: 300;
 }
 
 @font-face {
     font-family: "IBMPlexSans";
-    src: url(/assets/fonts/IBMPlexSans-Medium.woff) format("woff");
+    src: url(/assets/fonts/ibm-plexsans/IBMPlexSans-Medium.woff) format("woff");
     font-weight: 500;
 }
 
 @font-face {
     font-family: "IBMPlexSans";
-    src: url(/assets/fonts/IBMPlexSans-Regular.woff) format("woff");
+    src: url(/assets/fonts/ibm-plexsans/IBMPlexSans-Regular.woff) format("woff");
     font-weight: 400;
 }
 
 @font-face {
     font-family: "IBMPlexSans";
-    src: url(/assets/fonts/IBMPlexSans-SemiBold.woff) format("woff");
+    src: url(/assets/fonts/ibm-plexsans/IBMPlexSans-SemiBold.woff) format("woff");
+    font-weight: 600;
+} 
+
+
+
+
+
+
+
+
+@font-face {
+    font-family: "spartan";
+    src: url(/assets/fonts/spartan/LeagueSpartan-Thin.woff) format("woff");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "spartan";
+    src: url(/assets/fonts/spartan/LeagueSpartan-ExtraLight.woff) format("woff");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "spartan";
+    src: url(/assets/fonts/spartan/LeagueSpartan-Light.woff) format("woff");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "spartan";
+    src: url(/assets/fonts/spartan/LeagueSpartan-Regular.woff) format("woff");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "spartan";
+    src: url(/assets/fonts/spartan/LeagueSpartan-Medium.woff) format("woff");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "spartan";
+    src: url(/assets/fonts/spartan/LeagueSpartan-SemiBold.woff) format("woff");
     font-weight: 600;
 }
 
+@font-face {
+    font-family: "spartan";
+    src: url(/assets/fonts/spartan/LeagueSpartan-Bold.woff) format("woff");
+    font-weight: "wght" 700;
+}
+
+
+
 body {
-    font-family: "IBMPlexSans";
-    
+    font-family: "spartan";
 }

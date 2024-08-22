@@ -1,5 +1,5 @@
 @import url(/assets/global_files/global.css);
-@import url(/assets/global_files/typography.css);
+
 
 .overview {
     color: #edf2f4;
@@ -23,9 +23,6 @@
     font-weight: 400;
 }
 
-.title h1 {
-    -webkit-text-stroke: white 0.5px;
-}
 
 .title h1:nth-child(7) {
     margin-right: 0.5em;
@@ -113,7 +110,7 @@
 
 label {
     color: #7ebbd7;
-    font-weight: 500;
+    font-weight: 800;
     font-size: 1.5em;
 }
 input, textarea {
