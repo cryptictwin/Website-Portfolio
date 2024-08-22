@@ -1,0 +1,74 @@
+@import url(/assets/global_files/typography.css);
+
+@import url(/assets/global_files/global.css);
+
+
+header {
+    display: flex;
+    padding: 30px 30px 0px 30px;
+    justify-content: flex-end;
+    width: 100%;
+    background-repeat: repeat;
+    margin-bottom: auto;
+}
+
+#toggle-1 {
+    display: none;
+}
+
+.toggle-menu {
+    display: none;
+}
+
+.line {
+    display: block;
+    height: 5px;
+    width: 30px;
+    margin: 5px;
+    background-color: #edf2f4;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    list-style: none;
+    transition: all 0.2s;
+}
+
+nav ul li:last-child {
+    margin-right: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #edf2f4;
+    font-weight: 700;
+    font-size: 2em;
+    padding: 0px 20px;
+    transition: all 0.2s ease 0s;
+}
+
+nav ul li:first-child a {
+    opacity: 1;
+    color: #7ebbd7;
+}
+
+nav ul li a:hover {
+    color: #7ebbd7;
+}
+
+nav ul li:hover {
+    transform: scale(1.1);
+}
+
+@media only screen and (max-width: 950px) {
+    .toggle-menu {
+        display: inline-block;
+        float: none;
+    }
+    nav {
+        display: none;
+    }
+}
