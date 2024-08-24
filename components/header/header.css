@@ -12,6 +12,11 @@ header {
     margin-bottom: auto;
 }
 
+#searchbar {
+    margin: auto;
+    height: 20px;
+}
+
 #toggle-1 {
     display: none;
 }

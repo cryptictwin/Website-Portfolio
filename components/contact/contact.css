@@ -106,21 +106,30 @@
 }
 
 label {
-    color: #7ebbd7;
+    color: white;
     font-weight: 800;
     font-size: 1.5em;
 }
-input, textarea {
+input[type="text"], textarea {
     width: 100%;
     background: none;
     border: none;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #cccccc;
     outline: none;
     color: #edf2f4;
-    margin: 5px 0 50px 0;
+    margin: 5px 0 70px 0;
     padding: 10px;
     font-size: 1.2em;
     resize: vertical;
+}
+
+input[type="submit"] {
+    font-size: 1.3em;
+    padding: 7px;
+    font-weight: 700;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
 }
 
 @media only screen and (max-width: 800px) {
