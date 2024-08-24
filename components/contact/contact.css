@@ -4,7 +4,7 @@
 .overview {
     color: #edf2f4;
     width: 70%;
-    font-size: 2.2em;
+    font-size: 2.5em;
     text-align: center;
     align-self: center;
     margin: 100px auto;
@@ -20,7 +20,7 @@
     display: flex;
 }
 .overview h6 {
-    font-weight: 400;
+    font-weight: 300;
 }
 
 
@@ -60,9 +60,6 @@
     }
 }
 
-@keyframes swing {
-
-}
 .title h1:nth-child(1) {
 
     animation: flicker 6s ease-in-out 10s infinite alternate both;

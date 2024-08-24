@@ -45,7 +45,7 @@ nav ul li a {
     text-decoration: none;
     color: #edf2f4;
     font-weight: 700;
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 0px 20px;
     transition: all 0.2s ease 0s;
     
@@ -61,7 +61,7 @@ nav ul li:hover {
     transform: scale(1.1);
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 600px) {
     .toggle-menu {
         display: inline-block;
         float: none;

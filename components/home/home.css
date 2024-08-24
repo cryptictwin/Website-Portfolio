@@ -5,7 +5,7 @@
 .overview {
     color: #edf2f4;
     width: 50%;
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: 700;
     text-align: center;
     align-self: center;
@@ -22,7 +22,7 @@
     display: flex;
 }
 .overview h6 {
-    font-weight: 900;
+    font-weight: 300;
 }
 
 

@@ -3,57 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="projects.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="stylesheet" href="/components/header/header.css">
+    <link rel="stylesheet" href="/components/projects/projects.css">
+    <link rel="stylesheet" href="/components/footer/footer.css">
+    <link rel="stylesheet" href="/assets/global_files/typography.css">
     <title>Projects</title>
 </head>
-    <body>
-        <main>
-            <div class="overview">
-                <div class="title">
-                    <h1>P</h1><h1>R</h1><h1>O</h1><h1>J</h1><h1>E</h1><h1>C</h1><h1>T</h1><h1>S</h1>
-                </div>
-                <h6>
-                    These are some of the projects that i've worked on in the past. Go check them out!
-                </h6>
+<body> 
+    <header>
+        <label for="toggle-1" class="toggle-menu">
+            <div class="toggle">
+                <span class="line top"></span>
+                <span class="line middle"></span>
+                <span class="line bottom"></span>
             </div>
-            <section>
-                <div class="project one">
-                    <a href="/projects/link" target="_blank">
-                        <div class="card">
-                            <div class="thumbnail">
-                                <img src="/assets/images/carousel.png" alt="Project Thumbnail">
-                            </div>
-                            <div class="skills-applied">
-                                <div>CSS</div><div>HTML</div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="project-details">bfbdgvrsd</div>
-                </div>
-                <div class="project two">
+        </label>
+        <input type="checkbox" id="toggle-1">
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="projects.html">Projects</a>
+                </li>
+                <li>
+                    <a href="skills.html">Skills</a>
+                </li>
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="overview">
+            <div class="title" alt>
+                <h1><span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>C</span><span>T</span><span>S</span></h1>
+            </div>
+            <h6>
+                These are some of the projects that i've worked on in the past. Go check them out!
+            </h6>
+        </div>
+        <section>
+            <div class="project one">
+                <a href="/projects/link" target="_blank">
                     <div class="card">
                         <div class="thumbnail">
-                            <img src="/assets/images/loading.png" alt="Project Thumbnail">
+                            <img src="/assets/images/carousel.png" alt="Project Thumbnail">
                         </div>
-                        <div class="skills-applied"></div>
-                    </div>
-                    <div class="project-details">bfbdgvrsd</div>
-                </div>
-                <div class="project three">
-                    <div class="card">
-                        <div class="thumbnail">
-                            <img src="" alt="Project Thumbnail">
+                        <div class="skills-applied">
+                            <p>Skills Applied</p>
+                            <div><span>HTML</span><i class="fa-brands fa-css3-alt"></i></div><div><span>CSS</span><i class="fa-brands fa-html5"></i></div>
                         </div>
-                        <div class="skills-applied"></div>
                     </div>
-                    <div class="project-details">bfbdgvrsd</div>
+                </a>
+                <div class="project-details">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam accusamus porro aspernatur quam adipisci aliquid quis voluptatum enim possimus tempore culpa, quisquam quidem similique laborum sapiente consectetur sequi! Magni, quidem?</div>
+            </div>
+            <div class="project two">
+                <div class="card">
+                    <div class="thumbnail">
+                        <img src="/assets/images/loading.png" alt="Project Thumbnail">
+                    </div>
+                    <div class="skills-applied">
+                        <div>CSS</div><div>HTML</div>
+                    </div>
                 </div>
-            </section>
-        </main>
-    </body>
+                <div class="project-details">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates aliquam quod nobis cumque cum quo ut molestias, eos accusantium non molestiae recusandae repellat unde officiis nesciunt pariatur voluptate, provident quam!</div>
+            </div>
+            <div class="project three">
+                <div class="card">
+                    <div class="thumbnail">
+                        <img src="" alt="Project Thumbnail">
+                    </div>
+                    <div class="skills-applied">
+                        <div>CSS</div><div>HTML</div>
+                    </div>
+                </div>
+                <div class="project-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel laborum, porro expedita quasi adipisci asperiores molestias magnam natus ipsam neque? Eligendi voluptatibus beatae aspernatur expedita a similique repellat tenetur dolores.</div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <section>
+            <h5>Social Links</h5>
+            <ul>
+                <li><a href="https://github.com/cryptictwin" target="_blank" aria-label="GitHub Profile"><i class="fa-brands fa-square-github"></i></a>
+                </li>
+                <li><a href="https://www.linkedin.com/in/james-twin-a32452324" target="_blank" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+                </li>
+                <li><a href="https://codepen.io/cryptictwin" target="_blank" aria-label="Code pen Profile"><i class="fa-brands fa-codepen"></i></a>
+                </li>
+            </ul>
+        </section>
+    </footer>
+</body>
 </html>
