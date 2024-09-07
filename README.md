@@ -27,3 +27,15 @@ ex = x-height   relative to the height of a lower case x
 
 Do I need to scale an element when the viewport size changes?
 What do I want it to scale relative to?
+
+
+List of places where you should try to use your main keywords.
+
+Keywords in:
+
+    <title> tags
+    <meta name="description">
+    <meta name"keywords">
+    <h1> or other healine tags
+    <a href="">keywords</a> link tags
+    

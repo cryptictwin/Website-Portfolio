@@ -1,18 +1,17 @@
 * {
+    box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-    box-sizing: border-box;
 }
 
-html, body {
+body {
     background-image: url(/assets/images/zwartevilt.png);
     background-repeat: repeat;
     background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    margin: 0px;
+    padding: 0px;
 }
 
-body {
-    flex: 1;
-}

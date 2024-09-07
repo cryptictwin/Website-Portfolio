@@ -1,31 +1,31 @@
-
-
 @import url(/assets/global_files/global.css);
-
 
 header {
     display: flex;
-    padding: 30px 30px 0px 30px;
+    padding: 30px;
     justify-content: flex-end;
+    align-items: center;
     width: 100%;
     background-repeat: repeat;
     margin-bottom: auto;
 }
 
-#searchbar {
+header #searchbar {
     margin: auto;
     height: 20px;
 }
 
-#toggle-1 {
+header #toggle-1 {
     display: none;
 }
 
-.toggle-menu {
+header .toggle-menu {
     display: none;
+    cursor: pointer;
+    position: absolute;
 }
 
-.line {
+header .line {
     display: block;
     height: 5px;
     width: 30px;
@@ -33,45 +33,68 @@ header {
     background-color: #edf2f4;
 }
 
-nav ul {
+header h2 {
+    display: none;
+}
+
+header nav ul {
     display: flex;
 }
 
-nav ul li {
+header nav ul li {
     list-style: none;
     transition: all 0.2s;
 }
 
-nav ul li:last-child {
+header nav ul li:last-child {
     margin-right: 30px;
 }
 
-nav ul li a {
+header nav ul li a {
     text-decoration: none;
     color: #edf2f4;
     font-weight: 700;
-    font-size: 1.5em;
-    padding: 0px 20px;
+    font-size: 1.8em;
+    padding: 0px 30px;
     transition: all 0.2s ease 0s;
-    
 }
 
 
-
-nav ul li a:hover {
+header nav ul li a:hover {
     color: #7ebbd7;
 }
 
-nav ul li:hover {
+header nav ul li:hover {
     transform: scale(1.1);
 }
 
-@media only screen and (max-width: 600px) {
-    .toggle-menu {
+
+@media only screen and (max-width: 1500px) {
+    header {
+        justify-content: flex-start;
+    }
+    header .toggle-menu {
         display: inline-block;
         float: none;
+        position: absolute;
+        z-index: 2;
     }
-    nav {
+    header nav {
         display: none;
+        height: 100vh;
+        width: 180px;
+        position: absolute;
+        left: 0px;
+        background-color: #ffffff;
+        transition: 0.5s ease;
+    }
+    header nav h1 {
+        color: blue;
+        text-align: left;
+        padding: 10px 0px;
+        padding-left: 30px;
+    }
+    input[type="checkbox"]:checked ~ nav{
+        display: block;
     }
 }
