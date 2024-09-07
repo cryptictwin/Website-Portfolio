@@ -19,4 +19,5 @@ window.onload = function () {
     loadComponent('skills', '/components/skills/skills.html');
     loadComponent('projects', '/components/projects/projects.html');
     loadComponent('contact', '/components/contact/contact.html');
+    loadComponent('side-nav', '/components/side-nav/side_nav.html');
 }

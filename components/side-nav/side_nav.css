@@ -1,0 +1,103 @@
+@import url(/assets/global_files/global.css);
+
+section input {
+    display: none;
+}
+section nav {
+    display: none;
+    height: 100%;
+    width: 100vw;
+    position: fixed;
+    background-color: rgb(118, 44, 44);
+    transition: 0.5s ease;
+    z-index: 2;
+    left: -100vw;
+}
+
+section nav h2 {
+    color: blue;
+    font-weight: 800;
+    font-size: 2em;
+    text-align: right;
+    padding: 30px 0px;
+    padding-right: 30px;
+}
+
+section nav ul li {
+    list-style: none;
+}
+
+section nav ul li a {
+    text-decoration: none;
+    padding: 10px 0px;
+    display: block;
+    font-size: 1.5em;
+    font-weight: 500;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+section nav ul li a i {
+    text-align: center;
+    padding: 0px 10px;
+}
+
+
+.toggle {
+    display: none;
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 20px;
+    left: 15px;
+    z-index: 3;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.213);
+}
+
+.toggle .line {
+    position: absolute;
+    height: 3px;
+    width: 30px;
+    background-color: #7ebbd7;
+    border-radius: 50px;
+    transition: 0.3s ease;
+}
+
+.toggle .top {
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.toggle .middle {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.toggle .bottom {
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+}
+
+@media only screen and (max-width: 700px) {
+    section nav, .toggle {
+        display: block;
+    }
+}
+
+input[type="checkbox"]:checked ~ nav {
+    left: 0px;
+}
+
+input[type="checkbox"]:checked ~ label .toggle{
+    position: fixed;
+}
+
+section nav ul li a:hover {
+    color: white;
+    background-color: rgb(45, 90, 75);
+}

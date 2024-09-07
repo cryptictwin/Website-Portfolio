@@ -15,24 +15,6 @@ header #searchbar {
     height: 20px;
 }
 
-header #toggle-1 {
-    display: none;
-}
-
-header .toggle-menu {
-    display: none;
-    cursor: pointer;
-    position: absolute;
-}
-
-header .line {
-    display: block;
-    height: 5px;
-    width: 30px;
-    margin: 5px;
-    background-color: #edf2f4;
-}
-
 header h2 {
     display: none;
 }
@@ -69,32 +51,8 @@ header nav ul li:hover {
 }
 
 
-@media only screen and (max-width: 1500px) {
-    header {
-        justify-content: flex-start;
-    }
-    header .toggle-menu {
-        display: inline-block;
-        float: none;
-        position: absolute;
-        z-index: 2;
-    }
+@media only screen and (max-width: 700px) {
     header nav {
         display: none;
-        height: 100vh;
-        width: 180px;
-        position: absolute;
-        left: 0px;
-        background-color: #ffffff;
-        transition: 0.5s ease;
-    }
-    header nav h1 {
-        color: blue;
-        text-align: left;
-        padding: 10px 0px;
-        padding-left: 30px;
-    }
-    input[type="checkbox"]:checked ~ nav{
-        display: block;
     }
 }
