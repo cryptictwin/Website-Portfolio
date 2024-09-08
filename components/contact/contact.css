@@ -27,10 +27,15 @@
 
 .overview h6 a {
     text-decoration: none;
-    color: #d90429;
+    color: #e54d26;
     font-weight: 900;
+    display: inline-block;
+    transition: all 0.3s;
 }
 
+.overview h6 a:hover {
+    transform: scale(1.2);
+}
 
 .container {
     margin: 100px auto;

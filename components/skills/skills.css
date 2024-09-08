@@ -2,64 +2,50 @@ main {
     margin: 100px 0;
 }
 
-.overview {
-    color: #edf2f4;
-    font-size: 3em;
-    text-align: center;
-    
-    
-}
 
-.overview h1 {
-    color: #7ebbd7;
+main h2{
+    color: #edf2f4;
     justify-content: center;
     width: 100%;
     font-weight: 500;
     text-align: center;
     margin: 0px;
+    font-size: 6em;
 }
 
-
+@media only screen and (max-width: 1330px) {
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 150px;
+    }
+    .container h5 {
+        width: 80%;
+    }
+}
 
 @media only screen and (max-width: 650px) {
-    .overview {
-        font-size: 2.5em;
+    main h2 {
+        font-size: 3.5em;
     } 
 }
 
 @media only screen and (max-width: 500px) {
-    .overview {
-        font-size: 2em;
+    main h2 {
+        font-size: 3.5em;
+    }
+    .container .skill div {
+        width: 80vw;
     }
 }
 
 @media only screen and (max-width: 400px) {
-    .overview {
-        font-size: 1.8em;
-    } 
 }
 
 @media only screen and (max-width: 320px) {
-    .overview {
-        font-size: 1.7em;
-    } 
 }
 
-@keyframes flicker {
-    0%, 2%, 35%, 37%, 39%, 41%, 100% {
-        opacity: 1;
-        text-shadow: 0px 0px 10px #7ebbd7;
-    }
-    1%, 3%, 34%, 36%, 38%, 40% {
-        opacity: 0.8;
-        text-shadow: none;
-    }
-}
-
-.overview h1:nth-child(1) {
-
-    animation: flicker 6s ease-in-out 6.3s infinite alternate both;
-}
 
 .container {
     display: flex;
@@ -71,6 +57,7 @@ main {
     width: 10px;
     height: 200px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: all 0.7s;
@@ -78,16 +65,32 @@ main {
     flex-shrink: 1;
 }
 
+.container h5 {
+    font-size: 1.5em;
+    color: #edf2f4;
+    width: 50%;
+    height: 10%;
+    font-weight: 300;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    margin-top: -100px;
+}
 .container .skill i {
     font-size: 15em;
     padding: 40px 60px;
-    border-radius: 50%;
-    transition: all 0.3s;
+    transition: all 0.5s ease;;
 }
 
-
+.container .skill div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
 .one {
-    color: blue;
+    color: #1d76b8;
     flex-direction: column;
 }
 
@@ -96,14 +99,23 @@ main {
 }
 
 .three {
-    color: yellow;
+    color: #f7e018;
 }
 
 .skill:hover {
     flex-grow: 2;
 }
-
-.skill:hover i {
-    background-color: white;
-    border: 5px solid rgb(255, 0, 0);
+.skill:hover h5 {
+    opacity: 1;
 }
+.skill:hover div{
+    /* background-color: rgba(255, 255, 255, 0.007); */
+    border-right: solid 2px white;
+    border-left: solid 2px white;
+}
+
+.skill div:hover i {
+    transform: translateY(-20%);
+}
+
+

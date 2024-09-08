@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url(/assets/images/zwartevilt.png);
+    background-color: #131313;
     background-repeat: repeat;
     background-attachment: fixed;
     min-height: 100vh;

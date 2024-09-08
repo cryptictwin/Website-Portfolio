@@ -10,7 +10,7 @@ main {
 }
 
 .flip-container {
-    perspective: 1000px; /* Adjust for stronger or weaker 3D effect */
+    perspective: 1000px;
     border-radius: 50%;
     margin: 0px auto;
 }
@@ -38,12 +38,12 @@ main {
 }
 
 .front {
-    background: url('/assets/images/profile-picture.jpg') no-repeat center center;
+    background: url('/assets/images/profile-picture.webp') no-repeat center center;
     background-size: cover;
 }
 
 .back {
-    background: #f0f0f0; /* You can use a color or an image */
+    background: #f0f0f0; 
     transform: rotateY(180deg);
     font-size: 20px;
     color: #333;
@@ -106,6 +106,6 @@ h6 {
 
 
 h6 span {
-    color: #d90429;
+    color: #e54d26;
     font-weight: 900;
 }

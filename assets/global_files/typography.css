@@ -83,8 +83,15 @@
     font-weight: "wght" 700;
 }
 
-
+@font-face {
+    font-family: "user name";
+    src: url(/assets/fonts/dela-gothic-one/DelaGothicOne-Regular.woff) format("woff");
+}
 
 body {
     font-family: "spartan";
+}
+
+header h1 {
+    font-family: "user name"
 }
