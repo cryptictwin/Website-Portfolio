@@ -77,3 +77,9 @@ input[type="submit"] {
         width: 80%;
     }
 }
+
+@media only screen and (max-width: 650px) {
+    main .overview  {
+        font-size: 2vw;
+    } 
+}
