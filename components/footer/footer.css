@@ -64,3 +64,10 @@ footer section ul li:nth-child(odd):hover i {
 footer section ul li:nth-child(2):hover i {
     color: #0e76a8;
 }
+
+@media only screen and (max-width: 700px) {
+    section {
+        font-size: 3vw;
+        width: 80vw;
+    }
+}
