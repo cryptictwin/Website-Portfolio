@@ -1,4 +1,4 @@
-@import url(/assets/global_files/global.css);
+@import url(/Website-Portfolio/assets/global_files/global.css);
 
 main {
     display: flex;
@@ -38,7 +38,7 @@ main {
 }
 
 .front {
-    background: url('/assets/images/profile-picture.webp') no-repeat center center;
+    background: url('/Website-Portfolio/assets/images/profile-picture.webp') no-repeat center center;
     background-size: cover;
 }
 

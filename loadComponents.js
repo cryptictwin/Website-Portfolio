@@ -13,11 +13,11 @@ function loadComponent(elementId, filePath) {
 }
 
 window.onload = function () {
-    loadComponent('home', '/components/home/home.html');
-    loadComponent('header', '/components/header/header.html');
-    loadComponent('footer', '/components/footer/footer.html');
-    loadComponent('skills', '/components/skills/skills.html');
-    loadComponent('projects', '/components/projects/projects.html');
-    loadComponent('contact', '/components/contact/contact.html');
-    loadComponent('side-nav', '/components/side-nav/side_nav.html');
+    loadComponent('home', '/Website-Portfolio/components/home/home.html');
+    loadComponent('header', '/Website-Portfolio/components/header/header.html');
+    loadComponent('footer', '/Website-Portfolio/components/footer/footer.html');
+    loadComponent('skills', '/Website-Portfolio/components/skills/skills.html');
+    loadComponent('projects', '/Website-Portfolio/components/projects/projects.html');
+    loadComponent('contact', '/Website-Portfolio/components/contact/contact.html');
+    loadComponent('side-nav', '/Website-Portfolio/components/side-nav/side_nav.html');
 }
