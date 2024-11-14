@@ -1,7 +1,7 @@
 @import url(/Website-Portfolio/assets/global_files/global.css);
 
 
-.overview {
+main .overview {
     color: #edf2f4;
     width: 70%;
     text-align: center;
@@ -9,7 +9,7 @@
     margin: 100px auto;
 }
 
-.overview h2 {
+main .overview h2 {
     display: flex;
     color: #edf2f4;
     justify-content: center;
@@ -17,15 +17,15 @@
     font-size: 6em;
 }
 
-.overview .title span {
+main .overview .title span {
     display: flex;
 }
-.overview h6 {
+main .overview h6 {
     font-weight: 200;
     font-size: 2.4em;
 }
 
-.overview h6 a {
+main .overview h6 a {
     text-decoration: none;
     color: #e54d26;
     font-weight: 900;
@@ -33,11 +33,11 @@
     transition: all 0.3s;
 }
 
-.overview h6 a:hover {
+main .overview h6 a:hover {
     transform: scale(1.2);
 }
 
-.container {
+main .container {
     margin: 100px auto;
     background-color: rgba(233, 224, 224, 0.181);
     padding: 50px;
@@ -45,12 +45,12 @@
     border-radius: 20px;
 }
 
-label {
+main label {
     color: white;
     font-weight: 800;
     font-size: 1.5em;
 }
-input[type="text"], textarea {
+main input[type="text"], textarea {
     width: 100%;
     background: none;
     border: none;
@@ -63,7 +63,7 @@ input[type="text"], textarea {
     resize: vertical;
 }
 
-input[type="submit"] {
+main input[type="submit"] {
     font-size: 1.3em;
     padding: 7px;
     font-weight: 700;
@@ -73,7 +73,7 @@ input[type="submit"] {
 }
 
 @media only screen and (max-width: 800px) {
-    .container {
+    main .container {
         width: 80%;
     }
 }

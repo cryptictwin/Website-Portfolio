@@ -9,7 +9,7 @@ h2 {
     font-size: 6em;
 }
 
-main section{
+main section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -17,6 +17,7 @@ main section{
     margin: 150px auto;
     gap: 100px;
 }
+
 .card {
     background-color: #22222249;
     display: flex;
@@ -42,11 +43,12 @@ main section{
     font-size: 1.4em;
     text-align: center;
 }
+
 .project a {
     text-decoration: none;
 }
 
-.thumbnail{
+.thumbnail {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,15 +56,13 @@ main section{
     width: 100%;
     overflow: hidden;
 }
+
 .project .card div:first-child img {
     min-height: 100%;
     min-width: 100%;
     border-radius: 20px;
     transition: all 0.3s;
-    
 }
-
-
 
 .card h5 {
     color: #ffffff;
@@ -76,7 +76,6 @@ main section{
     width: 15px;
     height: 25px;
 }
-
 
 .skills-applied {
     display: flex;
@@ -98,6 +97,7 @@ main section{
     justify-content: center;
     align-items: center;
 }
+
 .skills-applied div:nth-child(2) div:nth-child(1) {
     background-color: #7ebbd7;
     height: 8px;
@@ -109,7 +109,6 @@ main section{
     background-color: #e54d26;
     height: 8px;
     width: 100%;
-    
 }
 
 .card:hover {
@@ -133,16 +132,12 @@ main section{
     width: 50%;
 }
 
-
-
 .card:hover h5 i {
     transform: rotate(180deg);
 }
-
 
 @media only screen and (max-width: 650px) {
     main h2 {
         font-size: 15vw;
     } 
 }
-
