@@ -87,3 +87,10 @@
  h1 {
      animation: flicker 6s ease-in-out 6.3s infinite alternate both;
  }
+
+ .error-message {
+     font-size: 1.3em;
+     color: red;
+     text-align: center;
+     margin-top: -20px;
+ }

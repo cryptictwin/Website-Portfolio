@@ -1,3 +1,5 @@
+let componentsLoaded = false;
+
 function loadComponent(elementId, filePath) {
     console.log(`Attempting to load component: ${elementId} from ${filePath}`);
     return fetch(filePath)
@@ -9,15 +11,25 @@ function loadComponent(elementId, filePath) {
             return response.text();
         })
         .then(data => {
-            document.getElementById(elementId).innerHTML = data;
-            console.log(`Inserted content for ${elementId}`);
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = data;
+                console.log(`Inserted content for ${elementId}`);
+            } else {
+                console.warn(`Element with id '${elementId}' not found`);
+            }
         })
         .catch(error => console.error('Error loading component:', error));
 }
 
-window.onload = function () {
-    console.log('Window loaded, starting to load components');
-    Promise.all([
+function loadComponents() {
+    if (componentsLoaded) {
+        console.log('Components already loaded, skipping...');
+        return Promise.resolve();
+    }
+
+    console.log('Starting to load components');
+    return Promise.all([
         loadComponent('home', '/Website-Portfolio/components/home/home.html'),
         loadComponent('header', '/Website-Portfolio/components/header/header.html'),
         loadComponent('footer', '/Website-Portfolio/components/footer/footer.html'),
@@ -34,7 +46,19 @@ window.onload = function () {
         // For example, for dropdowns:
         // var dropdowns = document.querySelectorAll('.dropdown-trigger');
         // M.Dropdown.init(dropdowns);
+
+        componentsLoaded = true;
+        // Dispatch the custom event
+        document.dispatchEvent(new Event('componentsLoaded'));
     }).catch(error => console.error('Error in loading components:', error));
-}; // Add this closing brace and semicolon
+}
+
+window.loadComponents = loadComponents;
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadComponents);
+} else {
+    loadComponents();
+}
 
 console.log('loadComponents.js fully loaded');

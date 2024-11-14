@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "firebase": "^11.0.1"
+  },
+  "name": "website-portfolio",
+  "version": "1.0.0",
+  "description": "WEB504 Assessment 1",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "babel-loader": "^9.2.1",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
