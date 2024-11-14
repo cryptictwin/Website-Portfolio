@@ -26,6 +26,10 @@
       <h4>Sign up</h4><br />
       <form id="signup-form">
         <div class="input-field">
+          <input type="text" id="signup-name" required />
+          <label for="signup-name">Choose display name</label>
+        </div>
+        <div class="input-field">
           <input type="email" id="signup-email" required />
           <label for="signup-email">Email address</label>
         </div>
@@ -62,6 +66,7 @@
     <div id="modal-account" class="modal">
         <div class="modal-content center-align">
           <h4>Account details</h4><br />
-          <div class="account-details"></div>
+          <p>Display Name: <span id="account-name"></span></p>
+          <p>Email: <span id="account-email"></span></p>
         </div>
     </div>

@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, 
+         createUserWithEmailAndPassword, 
+         signInWithEmailAndPassword, 
+         signOut, 
+         onAuthStateChanged, 
+         updateProfile } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBerviAfQ6SV5xSv2CqJAENLrbKyp_f7Ws",
@@ -14,31 +19,71 @@ const firebaseConfig = {
 function initializeFirebase() {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    // Remove .value and assign variables with the values for submit event listeners for form
-    const signUpEmailInput = document.getElementById('signup-email').value;
-    const signUpPasswordInput = document.getElementById('signup-password').value;
-    const logInEmailInput = document.getElementById('login-email').value;
-    const logInPasswordInput = document.getElementById('login-password').value;
-    const loggedOutNav =-document.querySelector('.logged-out');
-    const loggedInNav = document.querySelector('.logged-in');
-
+    const currUser = auth.currentUser;
+    const accountNameEl = document.getElementById('account-name');
+    const accountEmailEl = document.getElementById('account-email');
+    const signUpNameEl = document.getElementById('signup-name');
+    const signUpEmailEl = document.getElementById('signup-email');
+    const signUpPasswordEl = document.getElementById('signup-password');
+    const logInEmailInputEl = document.getElementById('login-email');
+    const logInPasswordInputEl = document.getElementById('login-password');
+    const loggedOutNav = document.querySelectorAll('.logged-out');
+    const loggedInNav = document.querySelectorAll('.logged-in');
+    const logOutButtonEl = document.getElementById('logout');
+    if (logOutButtonEl) {
+        logOutButtonEl.addEventListener('click', authSignOut);
+    }
     function loggedOutView() {
-        loggedOutNav.style.display = 'block';
-        loggedInNav.style.display = 'none';
+        loggedOutNav.forEach(element => {
+            element.style.display = 'block';
+        })
+        loggedInNav.forEach(element => {
+            element.style.display = 'none';
+        })
     }
 
     function loggedInView() {
-        loggedInNav.style.display = 'block';
-        loggedOutNav.style.display = 'none';
+        loggedInNav.forEach(element => {
+            element.style.display = 'block';
+        })
+        loggedOutNav.forEach(element => {
+            element.style.display = 'none';
+        })
     }
 
+    function authSignOut () {
+        signOut(auth).then(() => {
+            window.location.reload();
+          }).catch((error) => {
+            console.error(error.message);
+          });
+    }
+
+    function updateAccountModal(user) {
+        if (accountNameEl && accountEmailEl) {
+            accountNameEl.textContent = user.displayName;
+            accountEmailEl.textContent = user.email;
+    
+        }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          updateAccountModal(user);
+          loggedInView();
+        } else {
+          loggedOutView()
+        }
+    });
     // Now that components are loaded, we can safely query for the form
     const signUpForm = document.getElementById('signup-form');
     const logInForm = document.getElementById('login-form');
     if (signUpForm) {
         signUpForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+            const signUpEmailInput = signUpEmailEl.value;
+            const signUpPasswordInput = signUpPasswordEl.value;
+            const signUpNameInput = signUpNameEl.value;
 
             // Clear the prvious error message
             const previousError = document.querySelector('.error-message');
@@ -47,7 +92,11 @@ function initializeFirebase() {
                 .then((userCredential) => {
                     // User signed up successfully
                     const user = userCredential.user;
-                    console.log('User created:', user);
+                    return updateProfile(user, {
+                        displayName: signUpNameInput
+                    });
+                })
+                .then (() => {
                     // Close the modal
                     const modal = M.Modal.getInstance(document.getElementById('modal-signup'));
                     if (modal) {
@@ -56,7 +105,6 @@ function initializeFirebase() {
                     } else {
                         console.log('Modal instance not found');
                     }
-                    loggedInView();
                     // Clear the form
                     signUpForm.reset();
 
@@ -87,7 +135,8 @@ function initializeFirebase() {
     if (logInForm) {
         logInForm.addEventListener('submit', (e) => {
             e.preventDefault();
-
+            const logInEmailInput = logInEmailInputEl.value;
+            const logInPasswordInput = logInPasswordInputEl.value;
             // Clear the prvious error message
             const previousError = document.querySelector('.error-message');
             if (previousError) previousError.remove();
@@ -106,7 +155,6 @@ function initializeFirebase() {
                     } else {
                         console.log('Modal instance not found');
                     }
-                    loggedInView();
                     // Clear the form
                     logInForm.reset();
                 })
