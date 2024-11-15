@@ -44,7 +44,7 @@ function initializeFirebase() {
     const textAreaEl = document.getElementById('post-input');
     const postButtonEl = document.getElementById('post-btn');
     const postsEl = document.getElementById('posts');
-    const postSectionEl = document.querySelector('.post-section');
+    const postSectionEl = document.querySelector('post-section');
     if (logOutButtonEl) {
         logOutButtonEl.addEventListener('click', authSignOut);
     }
@@ -55,8 +55,11 @@ function initializeFirebase() {
         loggedInNav.forEach(element => {
             element.style.display = 'none';
         })
-        postSectionEl.innerHTML = "<h4>You must be logged in to post.</h4>";
-        postSectionEl.style.width = "fit-content"
+        textAreaEl.disabled = true;
+        textAreaEl.placeholder = 'You must be logged in to post';
+        postButtonEl.disabled = true;
+        postButtonEl.style.cursor = "not-allowed";
+        postButtonEl.classList.add('no-hover'); 
     }
 
     function loggedInView() {
@@ -66,12 +69,11 @@ function initializeFirebase() {
         loggedOutNav.forEach(element => {
             element.style.display = 'none';
         })
-        if (postSectionEl) {
-            postSectionEl.innerHTML = `<div class="post-section">
-                                        <textarea id="post-input" placeholder="Write down how you're feeling"></textarea>
-                                        <button id="post-btn" class="primary-btn">Post</button>
-                                       </div>`;
-        }
+        textAreaEl.disabled = false;
+        textAreaEl.placeholder = 'Write a post...';
+        postButtonEl.disabled = false;
+        postButtonEl.style.cursor = "pointer";
+        postButtonEl.classList.remove('no-hover');
     }
 
     function clearAll(element) {
