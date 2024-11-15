@@ -144,6 +144,13 @@ main section {
     margin: 150px auto 50px;
 }
 
+.post-section h4 {
+    width: 500px;
+    color: white;
+    margin: 0px auto;
+    text-align: center;
+}
+
 textarea {
     font-size: 1em;
     box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, .25);

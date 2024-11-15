@@ -44,6 +44,7 @@ function initializeFirebase() {
     const textAreaEl = document.getElementById('post-input');
     const postButtonEl = document.getElementById('post-btn');
     const postsEl = document.getElementById('posts');
+    const postSectionEl = document.querySelector('.post-section');
     if (logOutButtonEl) {
         logOutButtonEl.addEventListener('click', authSignOut);
     }
@@ -54,6 +55,8 @@ function initializeFirebase() {
         loggedInNav.forEach(element => {
             element.style.display = 'none';
         })
+        postSectionEl.innerHTML = "<h4>You must be logged in to post.</h4>";
+        postSectionEl.style.width = "fit-content"
     }
 
     function loggedInView() {
@@ -63,6 +66,12 @@ function initializeFirebase() {
         loggedOutNav.forEach(element => {
             element.style.display = 'none';
         })
+        if (postSectionEl) {
+            postSectionEl.innerHTML = `<div class="post-section">
+                                        <textarea id="post-input" placeholder="Write down how you're feeling"></textarea>
+                                        <button id="post-btn" class="primary-btn">Post</button>
+                                       </div>`;
+        }
     }
 
     function clearAll(element) {
@@ -103,6 +112,7 @@ function initializeFirebase() {
           fetchInRTAndRenderPosts();
         } else {
           loggedOutView()
+          fetchInRTAndRenderPosts();
         }
         // Close all modals
         const modals = document.querySelectorAll('.modal');
@@ -244,7 +254,7 @@ function initializeFirebase() {
 
     postButtonEl.addEventListener('click', postButtonPressed);
     
-    
+
     function postButtonPressed() {
         const user = auth.currentUser;
         const postText = textAreaEl.value;
