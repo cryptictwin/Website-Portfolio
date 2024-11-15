@@ -9,13 +9,13 @@ main {
 
 }
 
-.flip-container {
+main .flip-container {
     perspective: 1000px;
     border-radius: 50%;
     margin: 0px auto;
 }
 
-.flip-card {
+main .flip-card {
     width: 500px;
     height: 500px;
     position: relative;
@@ -25,11 +25,12 @@ main {
     transform: rotateY(0deg);
 }
 
-.flip-container:hover .flip-card {
+main .flip-container:hover .flip-card {
     transform: rotateY(180deg);
 }
 
-.flip-card > div {
+
+main .flip-card > div {
     border-radius: 50%;
     position: absolute;
     width: 100%;
@@ -37,12 +38,12 @@ main {
     backface-visibility: hidden;
 }
 
-.front {
+main .front {
     background: url('/Website-Portfolio/assets/images/profile-picture.webp') no-repeat center center;
     background-size: cover;
 }
 
-.back {
+main .back {
     background: #f0f0f0; 
     transform: rotateY(180deg);
     font-size: 20px;
@@ -50,14 +51,14 @@ main {
 }
 
 
-h2, h6 {
+main h2, h6 {
     color: #edf2f4;
     width: fit-content;
     text-align: center;
     align-self: center;
 }
 
-h2 {
+main h2 {
     color: #edf2f4;
     font-weight: 500;
     font-size: 6em;
@@ -66,7 +67,7 @@ h2 {
     text-align: center;
 }
 
-h6 {
+main h6 {
     width: 30%;
     font-weight: 200;
     align-self: center;
@@ -82,12 +83,12 @@ h6 {
         justify-content: center;
         row-gap: 50px;
     } 
-    h2 {
+    main h2 {
         width: 90%;
         margin: 10vw auto 0px;
         
     }
-    h6 {
+    main h6 {
         width: 80%;
         margin-bottom: 10vw;
     }
@@ -98,14 +99,14 @@ h6 {
         font-size: 2vw;
         width: 80vw;
     }
-    .flip-card {
+    main .flip-card {
         width: 70vw;
         height: 70vw
     }
 }
 
 
-h6 span {
+main h6 span {
     color: #e54d26;
     font-weight: 900;
 }

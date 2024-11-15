@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "firebase": "^11.0.1"
+    "firebase": "^11.0.1",
+    "particlesjs": "^2.2.3"
   },
   "name": "website-portfolio",
   "version": "1.0.0",

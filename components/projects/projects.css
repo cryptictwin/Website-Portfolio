@@ -136,6 +136,121 @@ main section {
     transform: rotate(180deg);
 }
 
+.post-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 300px;
+    margin: 150px auto 50px;
+}
+
+textarea {
+    font-size: 1em;
+    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, .25);
+    outline: none;
+    resize: none;
+    background-color: #110c14;
+    height: 6em;
+    border-radius: 5px;
+    width: 100%;
+    color: #b7c7bf;
+    padding: 5px;
+}
+
+textarea:focus::placeholder {
+    opacity: 0;
+}
+
+textarea::placeholder {
+    opacity: 0.4;
+    transition: all 0.2s;
+}
+
+button {
+    font-family: inherit;
+    font-weight: 500;
+    padding: 0.8em;
+    font-size: 1.3em;
+    border: 3px black;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 5px 0px 0px rgb(0, 0, 0);
+    background-color: #FFDE00;
+    user-select: none;
+    transition: all 0.1s;
+}
+
+button:hover {
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
+button:active {
+    background-color: #FFC800;
+    transform: scale(0.99);
+}
+
+button:focus:not(:active) {
+    background-color: #FFDE00;
+    outline: none;
+}
+
+
+.post {
+    display: flex;
+    flex-direction: column;
+    background-color: #110c14;
+    padding: 0.8em;
+    border-radius: 5px;
+    width: 700px;
+    margin: 20px auto;
+    box-shadow: 0px 0px 10px black;
+}
+
+.post:last-child {
+    margin-bottom: 100px;
+}
+
+.post .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.post .user-comment-profile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: fit-content;
+    gap: 15px;
+}
+
+.post .header h2 {
+    font-size: 2em;
+    margin: 0px;
+}
+.post .header h3 {
+    font-size: 1em;
+    color: aliceblue;
+}
+
+.post .header img {
+    width: 2em;
+    height: 2em;
+}
+
+.post p {
+    font-size: 1.3em;
+    line-height: 1.3em;
+    color: #b7c7bf;
+    font-weight: 500;
+    width: 500px;
+}
+
 @media only screen and (max-width: 650px) {
     main h2 {
         font-size: 15vw;

@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #131313;
+    background-color: #150f19;
     background-repeat: repeat;
     background-attachment: fixed;
     min-height: 100vh;
@@ -17,4 +17,8 @@ body {
 
 html {
     scroll-behavior: smooth;
+}
+
+html, body {
+    height: 100%;
 }
