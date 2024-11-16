@@ -369,6 +369,7 @@ function initializeFirebase() {
                     saveButton.textContent = 'Save';
                     saveButton.style.width = '30%';
                     saveButton.style.margin = '10px auto';
+                    saveButton.style.backgroundColor = '#7ebbd7';
                     saveButton.addEventListener('click', () => {
                         const newBody = textarea.value;
                         if (newBody !== postData.body) {

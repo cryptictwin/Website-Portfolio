@@ -1,24 +1,25 @@
 /* Import Materialize styles */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css');
 
-/* Scope Materialize styles to the header */
-#header .materialize-header {
-    /* This will apply Materialize styles only to elements within the header that have the materialize-header class */
+/* Scope Materialize styles to the header and main content */
+#header, .materialize-content {
+    /* This will apply Materialize styles only to elements within the header and main content that have the materialize-content class */
     all: initial;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-#header .materialize-header * {
+#header .materialize-content *, #contact .materialize-content * {
     all: unset;
 }
 
-/* Re-apply necessary Materialize styles for the header */
-#header .materialize-header .nav-wrapper,
-#header .materialize-header .container,
-#header .materialize-header ul,
-#header .materialize-header li,
-#header .materialize-header a,
-#header .materialize-header .modal {
+/* Re-apply necessary Materialize styles for the header and main content */
+#header .materialize-content .nav-wrapper,
+#header .materialize-content .container,
+#header .materialize-content ul,
+#header .materialize-content li,
+#header .materialize-content a,
+#header .materialize-content .modal,
+#contact .materialize-content form {
     all: revert;
 }
 
@@ -27,4 +28,5 @@
     display: none;
 }
 
-/* You can add any additional styles or overrides for the header here */
+/* You can add any additional styles or overrides for the header and contact page here */
+

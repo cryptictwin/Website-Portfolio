@@ -3,7 +3,7 @@
 main h2 {
     color: #edf2f4;
     justify-content: center;
-    font-weight: 500;
+    font-weight: 300;
     text-align: center;
     margin: 100px auto;
     font-size: 6em;
@@ -176,34 +176,35 @@ main textarea::placeholder {
 }
 
 main button {
-    font-family: inherit;
-    font-weight: 500;
-    padding: 0.8em;
-    font-size: 1.3em;
-    border: 3px black;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    cursor: pointer;
-    outline: none;
-    box-shadow: 0px 5px 0px 0px rgb(0, 0, 0);
-    background-color: #FFDE00;
+    width: 150px;
+    height: 50px;
+    margin: 0px auto;
+    line-height: 50px;
+    font-size: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    background: linear-gradient(45deg, transparent 5%, #d80032 5%);
+    border: 0;
+    color: white;
+    letter-spacing: 3px;
+    box-shadow: 6px 0px 0px #00E6F6;
+    outline: transparent;
+    position: relative;
     user-select: none;
-    transition: all 0.1s;
+    cursor: pointer;
+    box-shadow: 10px 5px black;
 }
 
 main button:hover {
-    transform: translateY(5px);
-    box-shadow: none;
+    background: linear-gradient(45deg, transparent 5%, #FF013C 5%, #FF013C 5%);
 }
 
 main button:active {
-    background-color: #FFC800;
-    transform: scale(0.99);
+    box-shadow: none;
+    transform: scale(0.95);
 }
 
 main button:focus:not(:active) {
-    background-color: #FFDE00;
+    background-color: none;
     outline: none;
 }
 

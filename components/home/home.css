@@ -5,7 +5,7 @@ main {
     justify-content: center;
     align-items: center;
     width: 90%;
-    margin: 50px auto;
+    margin: auto auto;
 
 }
 
@@ -61,7 +61,7 @@ main h2, h6 {
 
 main h2 {
     color: #edf2f4;
-    font-weight: 500;
+    font-weight: 300;
     font-size: 6em;
     width: 30%;
     align-self: center;
@@ -74,7 +74,7 @@ main h6 {
     font-weight: 200;
     align-self: center;
     text-align: center;
-    font-size: 2.4em;
+    font-size: 30px;
 }
 
 
@@ -87,7 +87,7 @@ main h6 {
     } 
     main h2 {
         width: 90%;
-        margin: 10vw auto 0px;
+        margin: 1vw auto 0px;
         
     }
     main h6 {
@@ -97,13 +97,16 @@ main h6 {
 }
 
 @media only screen and (max-width: 700px) {
-    main {
-        font-size: 2vw;
+    main h2{
+        font-size: 11vw;
         width: 80vw;
     }
     main .flip-card {
-        width: 70vw;
-        height: 70vw
+        width: 71vw;
+        height: 71vw
+    }
+    main h6 {
+        font-size: 4.3vw;
     }
 }
 

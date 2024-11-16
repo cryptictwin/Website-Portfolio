@@ -1,20 +1,38 @@
 @import url(/Website-Portfolio/assets/global_files/global.css);
 
-
+main {
+    display: flex;
+    width: fit-content;
+    justify-content: space-between;
+    margin: auto auto;
+    gap: 100px;
+}
 main .overview {
     color: #edf2f4;
     width: 70%;
     text-align: center;
-    align-self: center;
-    margin: 100px auto;
+    margin-left: 50px;
+}
+main form {
+    display: flex;
+    flex-direction: column;
+}
+
+main .contact {
+    display: flex;
+    gap: 50px;
+    justify-content: flex-start;
 }
 
 main .overview h2 {
     display: flex;
     color: #edf2f4;
     justify-content: center;
-    font-weight: 500;
+    text-align: center;
+    font-weight: 300;
     font-size: 6em;
+    width: 100%;
+    white-space: nowrap;
 }
 
 main .overview .title span {
@@ -22,7 +40,7 @@ main .overview .title span {
 }
 main .overview h6 {
     font-weight: 200;
-    font-size: 2.4em;
+    font-size: 2.0em;
 }
 
 main .overview h6 a {
@@ -38,20 +56,19 @@ main .overview h6 a:hover {
 }
 
 main .container {
-    margin: 100px auto;
-    background-color: rgba(233, 224, 224, 0.181);
     padding: 50px;
-    width: 600px;
     border-radius: 20px;
 }
 
+main .container .contact:nth-child(1) div {
+    width: 30%;
+}
 main label {
     color: white;
     font-weight: 800;
     font-size: 1.5em;
 }
 main input[type="text"], textarea {
-    width: 100%;
     background: none;
     border: none;
     border-bottom: 2px solid #cccccc;
@@ -60,26 +77,72 @@ main input[type="text"], textarea {
     margin: 5px 0 70px 0;
     padding: 10px;
     font-size: 1.2em;
-    resize: vertical;
+    resize: none;
 }
 
-main input[type="submit"] {
-    font-size: 1.3em;
-    padding: 7px;
-    font-weight: 700;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-}
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 940px) {
+    main {
+        flex-direction: column;
+        gap: 50px;
+    }
+    main .overview {
+        margin: 0px auto;
+    }
     main .container {
-        width: 80%;
+        max-width: 500px;
     }
 }
 
-@media only screen and (max-width: 650px) {
-    main .overview  {
-        font-size: 2vw;
-    } 
+@media only screen and (max-width: 600px) {
+    main .overview {
+        width: 80vw;
+        font-size: clamp(0.5em, 2.2vw, 3em)
+    }
+    main {
+        gap: 0px;
+    }
+    main .contact-form-submit {
+        scale: 0.9;
+    }
+
 }
+
+
+main .active {
+    color: white;
+}
+
+main #contact-email {
+    color: #edf2f4;
+}
+
+
+main .contact-form-submit {
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  background: linear-gradient(45deg, transparent 5%, #d80032 5%);
+  border: 0;
+  color: white;
+  letter-spacing: 3px;
+  box-shadow: 6px 0px 0px #00E6F6;
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  box-shadow: 10px 5px black;
+}
+
+main .contact-form-submit:hover {
+  background: linear-gradient(45deg, transparent 5%, #FF013C 5%, #FF013C 5%);
+  /* color: black; */
+}
+
+main .contact-form-submit:active {
+    box-shadow: none;
+    transform: scale(0.95);
+  }
+  

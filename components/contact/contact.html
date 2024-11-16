@@ -4,23 +4,23 @@
 <div class="overview">
     <h2>CONTACT ME</h2>
     <h6>
-        Reach out to me via <a href="mailto:jamestwin793@gmail.com">email</a> or fill out the form below
+        Reach out to me via <a href="mailto:jamestwin793@gmail.com">email</a> or fill out the form and i'll get back to you as soon as I can
     </h6>
 </div>
 <div class="container">
-    <form action="">
-        <label for="fname">First Name</label>
-        <input type="text" name="firstname" id="fname">
-
-        <label for="lname">Last Name</label>
-        <input type="text" name="firstname" id="lname">
-
-        <label for="email">Email</label>
-        <input type="text" name="email-address" id="email">
-
-        <label for="message">Message</label>
-        <textarea name="message" id="message"></textarea>
-
-        <input type="submit" value="Submit">
+    <form id="contact-form">
+        <div class="input-field">
+          <input type="text" id="contact-name" required />
+          <label for="contact-name">Name</label>
+        </div>
+        <div class="input-field">
+          <input type="email" id="contact-email" required />
+          <label for="contact-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="contact-message" required />
+          <label for="contact-message">Message</label>
+        </div>
+        <button class="contact-form-submit">Submit</button>
     </form>
 </div>
