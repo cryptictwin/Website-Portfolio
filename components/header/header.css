@@ -27,6 +27,7 @@
      color: #7ebbd7;
      font-weight: 400;
      margin: 0;
+     white-space: nowrap;
  }
  
  header nav ul {
@@ -64,7 +65,12 @@
  
  @media only screen and (max-width: 700px) {
      header h1 {
-         font-size: 7vw;
+        font-size: clamp(1.8em, 5vw, 3em)
+     }
+     header nav ul li a {
+         font-size: 1em;
+         padding: 0px 7px;
+         display: none;
      }
  }
  
@@ -87,6 +93,7 @@
      font-size: 1.3em;
      color: red;
      text-align: center;
+     line-height: normal;
      width: 60%;
      text-align: center;
      margin: 20px auto;
@@ -98,15 +105,41 @@
     }
 }
 
+header .modal {
+    width: fit-content;
+}
 
-header .google-btn {
-    margin: 10px 0;
+header .modal-content {
+    max-width: 350px;
+    background-color: #e5e6cd;
 }
 
 
+header .signup-btn {
+    width: 223.88px;
+    margin: 0px 35px;
+}
+
+header .login-btn {
+    width: 210.81px;
+    margin: 0px 35px;
+}
+
+header .google-btn {
+    margin: 10px 35px;
+    text-align: left;
+    width: fit-content;
+}
+
+header .active{
+    color: black;
+}
+
+header #modal-account h4 {
+    margin: 0px;
+}
 header #modal-account p {
     text-align: left;
-    width: 25%;
     margin: 0px auto;
     font-weight: 800;
 }

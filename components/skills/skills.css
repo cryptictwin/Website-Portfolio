@@ -13,7 +13,7 @@ main h2{
     font-size: 6em;
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: 1050px) {
     main .container {
         flex-direction: column;
         justify-content: center;
@@ -50,7 +50,7 @@ main h2{
 main .container {
     display: flex;
     margin: 100px auto;
-    width: 70%;
+    width: 1000px;
 }
 
 main .container .skill {

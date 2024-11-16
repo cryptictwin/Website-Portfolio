@@ -61,11 +61,13 @@ function initializeFirebase() {
         loggedInNav.forEach(element => {
             element.style.display = 'none';
         })
-        textAreaEl.disabled = true;
-        textAreaEl.placeholder = 'You must be logged in to post';
-        postButtonEl.disabled = true;
-        postButtonEl.style.cursor = "not-allowed";
-        postButtonEl.classList.add('no-hover'); 
+        if (textAreaEl && postButtonEl) {
+            textAreaEl.disabled = true;
+            textAreaEl.placeholder = 'You must be logged in to post';
+            postButtonEl.disabled = true;
+            postButtonEl.style.cursor = "not-allowed";
+            postButtonEl.classList.add('no-hover'); 
+        }
     }
 
     function loggedInView() {
@@ -75,11 +77,13 @@ function initializeFirebase() {
         loggedOutNav.forEach(element => {
             element.style.display = 'none';
         })
-        textAreaEl.disabled = false;
-        textAreaEl.placeholder = 'Write a post...';
-        postButtonEl.disabled = false;
-        postButtonEl.style.cursor = "pointer";
-        postButtonEl.classList.remove('no-hover');
+        if (textAreaEl && postButtonEl) {
+            textAreaEl.disabled = false;
+            textAreaEl.placeholder = 'Write a post...';
+            postButtonEl.disabled = false;
+            postButtonEl.style.cursor = "pointer";
+            postButtonEl.classList.remove('no-hover');
+        }
     }
 
     function clearAll(element) {
@@ -103,13 +107,23 @@ function initializeFirebase() {
     }
 
     function showProfilePicture(imgEl, user) {
-        const photoURL = user.photoURL;
-        if (photoURL) {
-            imgEl.src = photoURL;
-        } else {
-            imgEl.style.background = `url('/Website-Portfolio/assets/images/default-profile-picture.jpg')`;
-            imgEl.style.backgroundSize = 'cover';
+        if (!user.photoURL) {
+            // Set the default photo URL
+            user.photoURL = '/Website-Portfolio/assets/images/default-profile-picture.jpg';
+            // If you're using Firebase Auth, you might want to update the user profile
+            // updateProfile(user, { photoURL: user.photoURL }).catch(console.error);
         }
+    
+        // Set the image source
+        imgEl.src = user.photoURL;
+    
+        // Add error handling in case the image fails to load
+        imgEl.onerror = function() {
+            this.src = '/Website-Portfolio/assets/images/default-profile-picture.jpg';
+            this.onerror = null; // Prevents infinite loop if default image also fails to load
+        };
+    
+        imgEl.style.objectFit = 'cover';
     }
 
     onAuthStateChanged(auth, (user) => {
@@ -185,6 +199,7 @@ function initializeFirebase() {
                 .catch((error) => {
                     // Handle errors
                     const userErrorMsg = document.createElement('p');
+                    const modalContent = document.getElementById('signup-modal-content');
                     userErrorMsg.textContent = error.message;
                     userErrorMsg.classList.add('error-message');
                     if (error.code === 'auth/weak-password' || 
@@ -198,7 +213,7 @@ function initializeFirebase() {
                     } else {
                         userErrorMsg.textContent = "An error occurred during sign up. Please try again.";
                     }
-                    signUpForm.appendChild(userErrorMsg);
+                    modalContent.appendChild(userErrorMsg);
                     console.error('Signup error:', error);
                 });
         });
@@ -226,10 +241,11 @@ function initializeFirebase() {
                 })
                 .catch((error) => {
                     const userErrorMsg = document.createElement('p');
+                    const modalContent = document.getElementById('login-modal-content');
                     userErrorMsg.textContent = error.message;
                     userErrorMsg.classList.add('error-message');
                     userErrorMsg.textContent = "Invalid email or password. Please try again.";
-                    logInForm.appendChild(userErrorMsg);
+                    modalContent.appendChild(userErrorMsg);
                     console.error('Login error:', error);
                 });
         });
@@ -248,7 +264,8 @@ function initializeFirebase() {
               uid: currentUser.uid,
               body: postBody,
               displayName: currentUser.displayName,
-              timestamp: serverTimestamp()
+              timestamp: serverTimestamp(),
+              profilePicture: currentUser.photoURL
             });
             console.log("Document written with ID: ", docRef.id);
           } catch (e) {
@@ -260,8 +277,9 @@ function initializeFirebase() {
         field.value = ""
     }
 
-    postButtonEl.addEventListener('click', postButtonPressed);
-    
+    if (postButtonEl) {
+        postButtonEl.addEventListener('click', postButtonPressed);
+    }
 
     function postButtonPressed() {
         const user = auth.currentUser;
@@ -316,7 +334,7 @@ function initializeFirebase() {
         postHeaderUserCommentProfileDiv.className = 'user-comment-profile';
         postUserDisplayNameH2.textContent = postData.displayName;
         postDateH3.textContent = displayDate(postData.timestamp);
-        postUserImg.src = userProfilePicEl.src;
+        postUserImg.src = postData.profilePicture;
         postBodyP.textContent = replaceNewlinesWithBrTags(postData.body);
         postDiv.appendChild(postHeaderDiv);
         postDiv.appendChild(postBodyP);
@@ -451,8 +469,8 @@ window.onload = function() {
         connectParticles: true,
         color: '#89c8fe',
         sizeVariations: 3,
-        maxParticles: 50,
-        minDistance: 150,
+        maxParticles: 30,
+        minDistance: 100,
     });
 };
 // Listen for the custom event that signals components have been loaded

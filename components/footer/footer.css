@@ -10,6 +10,9 @@ footer {
     justify-self: flex-end;
 }
 
+footer section {
+    width: fit-content;
+}
 footer section p {
     font-size: 0.8em;
     text-align: center;
@@ -37,19 +40,26 @@ footer section ul li {
     padding: 5px 10px;
     border-radius: 50%;
     transition: all 0.2s;
+    padding: 0px;
 }
 
 footer section ul li a {
     font-size: 2em;
     color: white;
     text-align: center;
+    height: 50px;
     border-radius: 50%;
     transition: all 0.2s;
-    padding: 8px 10px;
+    padding: 10px 10px 25px 10px;
 }
 
 footer section ul li a i {
     transition: all 0.2s ease 0s;
+    width: 30px;
+}
+
+footer section ul li a i::before {
+    width: 30px;
 }
 
 footer section ul li:hover a {
@@ -68,7 +78,7 @@ footer section ul li:nth-child(2):hover i {
 }
 
 @media only screen and (max-width: 700px) {
-    section {
+    footer section {
         font-size: 3vw;
         width: 80vw;
     }

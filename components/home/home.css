@@ -56,6 +56,7 @@ main h2, h6 {
     width: fit-content;
     text-align: center;
     align-self: center;
+    background-color: #150f19;
 }
 
 main h2 {
@@ -65,6 +66,7 @@ main h2 {
     width: 30%;
     align-self: center;
     text-align: center;
+    
 }
 
 main h6 {

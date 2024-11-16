@@ -5,10 +5,10 @@ section input {
 }
 section nav {
     display: block;
-    height: 50%;
+    height: fit-content;
     width: 300px;
     position: fixed;
-    background-color: rgb(118, 44, 44);
+    background-color: #0a070c;
     transition: 0.5s ease;
     z-index: 2;
     left: -100vw;
@@ -35,7 +35,7 @@ section nav ul li a {
     display: block;
     font-size: 1.5em;
     font-weight: 500;
-    color: black;
+    color: rgb(156, 144, 144);
     transition: all 0.3s ease;
 }
 
