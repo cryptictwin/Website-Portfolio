@@ -6,13 +6,19 @@ import { getAuth,
          onAuthStateChanged, 
          updateProfile,
          signInWithPopup, 
-         GoogleAuthProvider } from 'firebase/auth';
+         GoogleAuthProvider,
+         currentUser } from 'firebase/auth';
 import { getFirestore,
          collection,
          addDoc,
+         doc,
          updateDoc,
          serverTimestamp,
-         onSnapshot } from 'firebase/firestore';
+         onSnapshot,
+         query,
+         orderBy,
+         limit,
+         deleteDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBerviAfQ6SV5xSv2CqJAENLrbKyp_f7Ws",
@@ -267,11 +273,13 @@ function initializeFirebase() {
     }
 
     function fetchInRTAndRenderPosts() {
-        onSnapshot(collection(db, collectionName), (snapshot) => {
+        const postRef = collection(db, collectionName);
+        const q = query(postRef, orderBy("timestamp", "desc"), limit(5));
+        onSnapshot(q, (snapshot) => {
             clearAll(postsEl);
             snapshot.forEach((doc) => {
                 const postData = doc.data();
-                renderPost(postsEl, postData);
+                renderPost(postsEl, postData, doc.id);
             })
         });
     }
@@ -290,29 +298,145 @@ function initializeFirebase() {
         hours = hours < 10 ? "0" + hours : hours
         minutes = minutes < 10 ? "0" + minutes : minutes
     
-        return `${day} ${month} ${year} - ${hours}:${minutes}`
+        return `${day} ${month} ${year}  AT  ${hours}:${minutes}`
     }
 
-    function renderPost(postsEl, postData) {
-        postsEl.innerHTML += `
-            <div class="post">
-                <div class="header">
-                    <div class="user-comment-profile">
-                        <h2>${postData.displayName}</h2>
-                        <img src="assets/emojis/${postData.mood}.png">
-                    </div>
-                    <h3>Posted: ${displayDate(postData.timestamp)}</h3>
-                </div>
-                <p>
-                    ${replaceNewlinesWithBrTags(postData.body)}
-                </p>
-            </div>
-        `
+
+    function renderPost(postsEl, postData, docId) {
+        const postDiv = document.createElement('div');
+        const postHeaderDiv = document.createElement('div');
+        const postHeaderUserCommentProfileDiv = document.createElement('div');
+        const postDateH3 = document.createElement('h3');
+        const postUserDisplayNameH2 = document.createElement('h2');
+        const postUserImg = document.createElement('img');
+        const postBodyP = document.createElement('p');
+        postBodyP.id = `post-body-${docId}`;
+        postDiv.className = 'post';
+        postHeaderDiv.className = 'header';
+        postHeaderUserCommentProfileDiv.className = 'user-comment-profile';
+        postUserDisplayNameH2.textContent = postData.displayName;
+        postDateH3.textContent = displayDate(postData.timestamp);
+        postUserImg.src = userProfilePicEl.src;
+        postBodyP.textContent = replaceNewlinesWithBrTags(postData.body);
+        postDiv.appendChild(postHeaderDiv);
+        postDiv.appendChild(postBodyP);
+        postHeaderDiv.appendChild(postUserImg);
+        postHeaderDiv.appendChild(postHeaderUserCommentProfileDiv);
+        postHeaderUserCommentProfileDiv.appendChild(postUserDisplayNameH2);
+        postHeaderUserCommentProfileDiv.appendChild(postDateH3);
+
+        if (auth.currentUser && auth.currentUser.uid === postData.uid) {
+            const editButton = document.createElement('i');
+            const deleteButton = document.createElement('i');
+            deleteButton.className = 'fa-solid fa-trash delete';
+            editButton.className = 'fa-solid fa-pen edit';
+            editButton.title = 'Edit post';
+            deleteButton.title = 'Delete post';
+            editButton.addEventListener('click', () => {
+                const postBodyEl = document.getElementById(`post-body-${docId}`);
+                if (postBodyEl.tagName.toLowerCase() === 'p') {
+                    const textarea = document.createElement('textarea');
+                    textarea.id = `post-body-${docId}`;
+                    textarea.value = postData.body;
+                    textarea.rows = 3; // Adjust as needed
+                    textarea.style.width = '100%';
+                    
+                    postBodyEl.parentNode.replaceChild(textarea, postBodyEl);
+                    
+                    // Focus on the textarea
+                    textarea.focus();
+                    
+                    // Add a save button
+                    const saveButton = document.createElement('button');
+                    saveButton.textContent = 'Save';
+                    saveButton.style.width = '30%';
+                    saveButton.style.margin = '10px auto';
+                    saveButton.addEventListener('click', () => {
+                        const newBody = textarea.value;
+                        if (newBody !== postData.body) {
+                            updatePost(docId, newBody);
+                        }
+                        // Change back to p element
+                        const newP = document.createElement('p');
+                        newP.id = `post-body-${docId}`;
+                        newP.textContent = replaceNewlinesWithBrTags(newBody);
+                        textarea.parentNode.replaceChild(newP, textarea);
+                        saveButton.remove();
+                    });
+                    
+                    textarea.parentNode.insertBefore(saveButton, textarea.nextSibling);
+                }
+            });
+            deleteButton.addEventListener('click', () => {
+              if (confirm('Are you sure you want to delete this post?')) {
+                deletePost(docId, postDiv);
+              }
+            });
+            postHeaderDiv.appendChild(editButton);
+            postHeaderDiv.appendChild(deleteButton);
+        }
+
+
+        postsEl.appendChild(postDiv);
     }
     
     function replaceNewlinesWithBrTags(inputString) {
         return inputString.replace(/\n/g, "<br>")
     }
+
+    async function updatePost(postId, newBody) {
+        const user = auth.currentUser;
+        if (!user) {
+          console.error('User must be signed in to update a post');
+          return;
+        }
+      
+        const postRef = doc(db, collectionName, postId);
+        
+        try {
+          await updateDoc(postRef, {
+            body: newBody,
+            lastUpdated: serverTimestamp()
+          });
+          console.log('Post updated successfully');
+        } catch (error) {
+          if (error.code === 'permission-denied') {
+            console.error('You do not have permission to update this post');
+          } else {
+            console.error('Error updating post:', error);
+          }
+        }
+      }
+
+      async function deletePost(postId, postElement) {
+        const user = auth.currentUser;
+        if (!user) {
+          console.error('User must be signed in to update a post');
+          return;
+        }
+      
+        const postRef = doc(db, collectionName, postId);
+        
+        try {
+          // Start the fade-out animation
+          postElement.classList.add('fade-out');
+
+          // Wait for the animation to complete
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          await deleteDoc(postRef);
+          console.log('Post deleted successfully');
+
+          // Remove the post element from the DOM
+          postElement.remove();
+        } catch (error) {
+          if (error.code === 'permission-denied') {
+            console.error('You do not have permission to delete this post');
+          } else {
+            console.error('Error deleting post:', error);
+          }
+        }
+      }
 }
 
 
