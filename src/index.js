@@ -3,11 +3,11 @@ import { getAuth,
          createUserWithEmailAndPassword, 
          signInWithEmailAndPassword, 
          signOut, 
+         sendEmailVerification,
          onAuthStateChanged, 
          updateProfile,
          signInWithPopup, 
-         GoogleAuthProvider,
-         currentUser } from 'firebase/auth';
+         GoogleAuthProvider, } from 'firebase/auth';
 import { getFirestore,
          collection,
          addDoc,
@@ -51,16 +51,22 @@ function initializeFirebase() {
     const postButtonEl = document.getElementById('post-btn');
     const postsEl = document.getElementById('posts');
     const postSectionEl = document.querySelector('post-section');
+
     if (logOutButtonEl) {
         logOutButtonEl.addEventListener('click', authSignOut);
     }
+
+    // Function to update UI for logged out users
     function loggedOutView() {
+        // Show login and  sign up elements for logged out users
         loggedOutNav.forEach(element => {
             element.style.display = 'block';
         })
+        // Hide logout and account elements for logged out users
         loggedInNav.forEach(element => {
             element.style.display = 'none';
         })
+        // Disable posting functionality for logged out users
         if (textAreaEl && postButtonEl) {
             textAreaEl.disabled = true;
             textAreaEl.placeholder = 'You must be logged in to post';
@@ -70,13 +76,17 @@ function initializeFirebase() {
         }
     }
 
+    // Function to update UI for logged in users
     function loggedInView() {
+        // Show logout and account elements for logged in users
         loggedInNav.forEach(element => {
             element.style.display = 'block';
         })
+        // Hide login and sign up elements for logged out users
         loggedOutNav.forEach(element => {
             element.style.display = 'none';
         })
+        // Enable posting functionality for logged in users
         if (textAreaEl && postButtonEl) {
             textAreaEl.disabled = false;
             textAreaEl.placeholder = 'Write a post...';
@@ -128,14 +138,25 @@ function initializeFirebase() {
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-          updateAccountModal(user);
-          loggedInView();
-          showProfilePicture(userProfilePicEl, user);
-          fetchInRTAndRenderPosts();
+            if (user.emailVerified) {
+                // If user is signed in and email is verified, show the logged in view and render posts
+                updateAccountModal(user);
+                loggedInView();
+                showProfilePicture(userProfilePicEl, user);
+                fetchInRTAndRenderPosts();
+            } else {
+                // If email is not verified, sign out the user
+                signOut(auth).then(() => {
+                    loggedOutView();
+                    fetchInRTAndRenderPosts();
+                });
+            }
         } else {
+          // If user is signed out, show the logged out view and render posts
           loggedOutView()
           fetchInRTAndRenderPosts();
         }
+
         // Close all modals
         const modals = document.querySelectorAll('.modal');
         modals.forEach((modalElement) => {
@@ -176,8 +197,10 @@ function initializeFirebase() {
     const signUpForm = document.getElementById('signup-form');
     const logInForm = document.getElementById('login-form');
     if (signUpForm) {
-        signUpForm.addEventListener('submit', (e) => {
+        signUpForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // Get user input values
             const signUpEmailInput = signUpEmailEl.value;
             const signUpPasswordInput = signUpPasswordEl.value;
             const signUpNameInput = signUpNameEl.value;
@@ -185,19 +208,28 @@ function initializeFirebase() {
             // Clear the prvious error message
             const previousError = document.querySelector('.error-message');
             if (previousError) previousError.remove();
-            createUserWithEmailAndPassword(auth, signUpEmailInput, signUpPasswordInput)
-                .then((userCredential) => {
-                    // User signed up successfully
-                    const user = userCredential.user;
-                    return updateProfile(user, {
-                        displayName: signUpNameInput
-                    });
-                })
-                .then (() => {
-                    signUpForm.reset();
-                })
-                .catch((error) => {
-                    // Handle errors
+            try {
+                // Create the user
+                const userCredential = await createUserWithEmailAndPassword(auth, signUpEmailInput, signUpPasswordInput);
+                const user = userCredential.user;
+    
+                // Update the user's profile with their display name
+                await updateProfile(user, {
+                    displayName: signUpNameInput
+                });
+                
+                // Sign out the user immmediately after creation
+                await signOut(auth);
+
+                // Send verification email to the user
+                await sendEmailVerification(user);
+                
+                // Reset the form and notify the user
+                signUpForm.reset();
+                alert("A verification email has been sent. Please verify your email to log in.");
+                } 
+                catch(error)  {
+                    // Error handling for sign-up process
                     const userErrorMsg = document.createElement('p');
                     const modalContent = document.getElementById('signup-modal-content');
                     userErrorMsg.textContent = error.message;
@@ -213,38 +245,57 @@ function initializeFirebase() {
                     } else {
                         userErrorMsg.textContent = "An error occurred during sign up. Please try again.";
                     }
+                    // Display the error message in the sign-up modal content
                     modalContent.appendChild(userErrorMsg);
                     console.error('Signup error:', error);
-                });
+                };
         });
     } else {
         console.error('Signup form not found');
     }
     if (logInForm) {
+        // Add a submit event listener to the login form
         logInForm.addEventListener('submit', (e) => {
+            // Prevent the default form submission behavior
             e.preventDefault();
+
+            // Get the email and password input values
             const logInEmailInput = logInEmailInputEl.value;
             const logInPasswordInput = logInPasswordInputEl.value;
+
             // Clear the prvious error message
             const previousError = document.querySelector('.error-message');
             if (previousError) previousError.remove();
+
+            // Attempt to sign in the user with the provided email and password
             signInWithEmailAndPassword(auth, logInEmailInput, logInPasswordInput)
                 .then((userCredential) => {
-
                     // User signed up successfully
                     const user = userCredential.user;
                     console.log('User logged in:', user);
 
+                    // Check if the user's email is verified
+                    if (!user.emailVerified) {
+                        // If email is not verified, sign out the user
+                        signOut(auth).then(() => {
+                            alert("You must verify your email to log in.");
+                            loggedOutView();
+                            fetchInRTAndRenderPosts();
+                        });
+                    }
 
-                    // Clear the form
+                    // Clear the login form
                     logInForm.reset();
                 })
                 .catch((error) => {
+                    // Error handling for login process
                     const userErrorMsg = document.createElement('p');
                     const modalContent = document.getElementById('login-modal-content');
                     userErrorMsg.textContent = error.message;
                     userErrorMsg.classList.add('error-message');
                     userErrorMsg.textContent = "Invalid email or password. Please try again.";
+                    
+                    // Display the error message in the login modal content
                     modalContent.appendChild(userErrorMsg);
                     console.error('Login error:', error);
                 });
@@ -260,6 +311,8 @@ function initializeFirebase() {
 
     async function addPostToDB(postBody, currentUser) {
         try {
+            // Adds a new document to the "posts" collection with a generated id.
+            // If there is no collection with the given name, it will be created along with the document.
             const docRef = await addDoc(collection(db, collectionName), {
               uid: currentUser.uid,
               body: postBody,
@@ -277,23 +330,54 @@ function initializeFirebase() {
         field.value = ""
     }
 
+    // When post button is clicked, add the post to firestore database
     if (postButtonEl) {
         postButtonEl.addEventListener('click', postButtonPressed);
     }
 
     function postButtonPressed() {
+        // Sets user to the currently signed in user
         const user = auth.currentUser;
         const postText = textAreaEl.value;
-        if (postText) {
+        // If the textArea is not empty, add the post to the database and clear the textarea field.
+        if (postText && postText.trim()!=='') {                   
             addPostToDB(postText, user);
             clearInputField(textAreaEl);
-        }
+        } else {
+            console.error("Post text is empty");
+            // Remove previous error message if it exists
+            if (document.getElementById('post-error-message')) {
+                document.getElementById('post-error-message').remove();
+            }
+            // Create and display error message
+            const errorMessage = document.createElement('p');
+            errorMessage.id = 'post-error-message';
+            errorMessage.textContent = 'Please enter some text before posting.';
+            errorMessage.style.color = 'red';
+            errorMessage.style.fontSize = '0.8em';
+            errorMessage.style.marginTop = '5px';
+            textAreaEl.style.borderColor = 'red';
+            
+            // Insert the error message after the textarea
+            textAreaEl.parentNode.insertBefore(errorMessage, textAreaEl.nextSibling);
+            
+            // Remove the red border and error message when the user starts typing
+            textAreaEl.addEventListener('input', function() {
+                this.style.borderColor = '';
+                const errorMsg = document.getElementById('post-error-message');
+                if (errorMsg) errorMsg.remove();
+            });
+        } 
     }
 
+    // Fetches and renders posts from Firestore in real-time
     function fetchInRTAndRenderPosts() {
+        // Fetch all documents from the "posts" collection and orders the timestamp in descending order
         const postRef = collection(db, collectionName);
         const q = query(postRef, orderBy("timestamp", "desc"), limit(5));
         onSnapshot(q, (snapshot) => {
+            // Clear all existing posts on the interface before rendering the posts from the Firestore snapshot
+            // The clearAll function prevents appending duplicate posts
             clearAll(postsEl);
             snapshot.forEach((doc) => {
                 const postData = doc.data();
@@ -321,6 +405,7 @@ function initializeFirebase() {
 
 
     function renderPost(postsEl, postData, docId) {
+        // Create DOM elements for the post
         const postDiv = document.createElement('div');
         const postHeaderDiv = document.createElement('div');
         const postHeaderUserCommentProfileDiv = document.createElement('div');
@@ -332,10 +417,14 @@ function initializeFirebase() {
         postDiv.className = 'post';
         postHeaderDiv.className = 'header';
         postHeaderUserCommentProfileDiv.className = 'user-comment-profile';
+
+        // Populate elements with post data
         postUserDisplayNameH2.textContent = postData.displayName;
         postDateH3.textContent = displayDate(postData.timestamp);
         postUserImg.src = postData.profilePicture;
         postBodyP.textContent = replaceNewlinesWithBrTags(postData.body);
+
+        // Construct the post structure
         postDiv.appendChild(postHeaderDiv);
         postDiv.appendChild(postBodyP);
         postHeaderDiv.appendChild(postUserImg);
@@ -343,7 +432,9 @@ function initializeFirebase() {
         postHeaderUserCommentProfileDiv.appendChild(postUserDisplayNameH2);
         postHeaderUserCommentProfileDiv.appendChild(postDateH3);
 
+        // Check if the current user is the author of the post
         if (auth.currentUser && auth.currentUser.uid === postData.uid) {
+            // Create edit and delete buttons for posts related to the current user
             const editButton = document.createElement('i');
             const deleteButton = document.createElement('i');
             deleteButton.className = 'fa-solid fa-trash delete';
@@ -353,15 +444,17 @@ function initializeFirebase() {
             editButton.addEventListener('click', () => {
                 const postBodyEl = document.getElementById(`post-body-${docId}`);
                 if (postBodyEl.tagName.toLowerCase() === 'p') {
+                    // Create a textarea element for editing
                     const textarea = document.createElement('textarea');
                     textarea.id = `post-body-${docId}`;
                     textarea.value = postData.body;
                     textarea.rows = 3; // Adjust as needed
                     textarea.style.width = '100%';
                     
+                    // Replace the paragraph element with the textarea element
                     postBodyEl.parentNode.replaceChild(textarea, postBodyEl);
                     
-                    // Focus on the textarea
+                    // Focus on the textarea after the user clicks the edit button
                     textarea.focus();
                     
                     // Add a save button
@@ -370,32 +463,65 @@ function initializeFirebase() {
                     saveButton.style.width = '30%';
                     saveButton.style.margin = '10px auto';
                     saveButton.style.backgroundColor = '#7ebbd7';
+                    // Add an event listener for the save button
                     saveButton.addEventListener('click', () => {
                         const newBody = textarea.value;
-                        if (newBody !== postData.body) {
+                        // Update the post in the database if the new body text is different from the old body text
+                        if (newBody.trim() !== "") {
                             updatePost(docId, newBody);
-                        }
-                        // Change back to p element
-                        const newP = document.createElement('p');
-                        newP.id = `post-body-${docId}`;
-                        newP.textContent = replaceNewlinesWithBrTags(newBody);
-                        textarea.parentNode.replaceChild(newP, textarea);
-                        saveButton.remove();
+                            // Change back to p element
+                            const newP = document.createElement('p');
+                            newP.id = `post-body-${docId}`;
+                            // Replace the text content of the p element with the new body text
+                            newP.textContent = replaceNewlinesWithBrTags(newBody);
+                            textarea.parentNode.replaceChild(newP, textarea);
+                            saveButton.remove();
+                        } else {
+                            console.error("Post text is empty");
+                            // Remove previous error message if it exists
+                            if (document.getElementById('edit-error-message')) {
+                                document.getElementById('edit-error-message').remove();
+                            }
+                            // Create and display error message
+                            const errorMessage = document.createElement('p');
+                            errorMessage.id = 'edit-error-message';
+                            errorMessage.textContent = 'Please enter some text before posting.';
+                            errorMessage.style.color = 'red';
+                            errorMessage.style.fontSize = '0.8em';
+                            errorMessage.style.marginTop = '5px';
+                            errorMessage.style.fontWeight = '500';
+                            
+                            // Insert the error message after the textarea
+                            textarea.parentNode.insertBefore(errorMessage, textarea.nextSibling);
+                            
+                            // Optionally, you can make the textarea border red to highlight the error
+                            textarea.style.borderColor = 'red';
+                            
+                            // Remove the red border and error message when the user starts typing
+                            textarea.addEventListener('input', function() {
+                                this.style.borderColor = '';
+                                const errorMsg = document.getElementById('edit-error-message');
+                                if (errorMsg) errorMsg.remove();
+                            });
+                        } 
                     });
-                    
+                    // Insert the save button after the textarea element
                     textarea.parentNode.insertBefore(saveButton, textarea.nextSibling);
                 }
             });
+            // Add an event listener for the delete button
             deleteButton.addEventListener('click', () => {
+                // If the user confirms the deletion, delete the post from the database
               if (confirm('Are you sure you want to delete this post?')) {
                 deletePost(docId, postDiv);
               }
             });
+            // Add edit and delete buttons to the post header
             postHeaderDiv.appendChild(editButton);
             postHeaderDiv.appendChild(deleteButton);
         }
 
-
+        // Append the complete post to the posts container
         postsEl.appendChild(postDiv);
     }
     
@@ -404,36 +530,49 @@ function initializeFirebase() {
     }
 
     async function updatePost(postId, newBody) {
+        // Get the currently authenticated user
         const user = auth.currentUser;
+
+        // Check if user is signed in
         if (!user) {
           console.error('User must be signed in to update a post');
           return;
         }
-      
+        // Create a reference to a specific post document in Firestore by 
+        // passing the id of the document as an argument for the postID parameter
         const postRef = doc(db, collectionName, postId);
         
         try {
+          // Attempt to update the post in Firestore  
           await updateDoc(postRef, {
-            body: newBody,
-            lastUpdated: serverTimestamp()
+            body: newBody,   // Update the body of the post with the new content
+            lastUpdated: serverTimestamp()   // Add a timestamp for when the post was last updated
           });
           console.log('Post updated successfully');
         } catch (error) {
+          // Handle any errors that occur during the update process  
           if (error.code === 'permission-denied') {
+            // Specific error for handling permission issues. 
             console.error('You do not have permission to update this post');
           } else {
+            // Generic error handling
             console.error('Error updating post:', error);
           }
         }
       }
 
       async function deletePost(postId, postElement) {
+        // Get the currently authenticated user
         const user = auth.currentUser;
+
+        // Check if user is signed in
         if (!user) {
           console.error('User must be signed in to update a post');
           return;
         }
-      
+        
+        // Create a reference to a specific post document in Firestore by
+        // passing the id of the document as an argument for the postID parameter
         const postRef = doc(db, collectionName, postId);
         
         try {
@@ -442,16 +581,20 @@ function initializeFirebase() {
 
           // Wait for the animation to complete
           await new Promise(resolve => setTimeout(resolve, 500));
-
+        
+          // Delete the post document from Firestore
           await deleteDoc(postRef);
           console.log('Post deleted successfully');
 
-          // Remove the post element from the DOM
+          // Remove the post element from the DOM after successful deletion
           postElement.remove();
         } catch (error) {
+          // Handle any errors that occur during the deletion process    
           if (error.code === 'permission-denied') {
+            // Specific error for handling permission issues. 
             console.error('You do not have permission to delete this post');
           } else {
+            // Generic error handling
             console.error('Error deleting post:', error);
           }
         }
@@ -474,5 +617,7 @@ window.onload = function() {
         minDistance: 100,
     });
 };
+
+ 
 // Listen for the custom event that signals components have been loaded
 document.addEventListener('componentsLoaded', initializeFirebase);

@@ -41,12 +41,6 @@ function loadComponents() {
         console.log('All components loaded, initializing Materialize components');
         var modals = document.querySelectorAll('.modal');
         M.Modal.init(modals);
-        
-        // Initialize other Materialize components if needed
-        // For example, for dropdowns:
-        // var dropdowns = document.querySelectorAll('.dropdown-trigger');
-        // M.Dropdown.init(dropdowns);
-
         componentsLoaded = true;
         // Dispatch the custom event
         document.dispatchEvent(new Event('componentsLoaded'));

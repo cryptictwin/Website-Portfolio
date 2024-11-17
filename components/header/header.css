@@ -91,11 +91,11 @@
  }
 
  header .error-message {
-     font-size: 1.3em;
+     font-size: 1em;
      color: red;
      text-align: center;
      line-height: normal;
-     width: 60%;
+     width: 100%;
      text-align: center;
      margin: 20px auto;
  }
