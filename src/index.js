@@ -108,6 +108,7 @@ function initializeFirebase() {
           });
     }
 
+
     function updateAccountModal(user) {
         if (accountNameEl && accountEmailEl) {
             accountNameEl.textContent = user.displayName;
@@ -339,8 +340,9 @@ function initializeFirebase() {
         // Sets user to the currently signed in user
         const user = auth.currentUser;
         const postText = textAreaEl.value;
+        const errorMessage = document.createElement('p');
         // If the textArea is not empty, add the post to the database and clear the textarea field.
-        if (postText && postText.trim()!=='') {                   
+        if (postText && postText.trim() !== '' && postText.length <= 500) {                   
             addPostToDB(postText, user);
             clearInputField(textAreaEl);
         } else {
@@ -350,13 +352,17 @@ function initializeFirebase() {
                 document.getElementById('post-error-message').remove();
             }
             // Create and display error message
-            const errorMessage = document.createElement('p');
             errorMessage.id = 'post-error-message';
-            errorMessage.textContent = 'Please enter some text before posting.';
             errorMessage.style.color = 'red';
             errorMessage.style.fontSize = '0.8em';
             errorMessage.style.marginTop = '5px';
             textAreaEl.style.borderColor = 'red';
+
+            if (postText.length > 500) {
+                errorMessage.textContent = 'Comment is too long. Please limit it to 500 characters.';
+            } else {
+                errorMessage.textContent = 'Please enter some text before posting.';
+            }
             
             // Insert the error message after the textarea
             textAreaEl.parentNode.insertBefore(errorMessage, textAreaEl.nextSibling);
@@ -414,6 +420,7 @@ function initializeFirebase() {
         const postUserImg = document.createElement('img');
         const postBodyP = document.createElement('p');
         postBodyP.id = `post-body-${docId}`;
+        postBodyP.style.width = '100%';
         postDiv.className = 'post';
         postHeaderDiv.className = 'header';
         postHeaderUserCommentProfileDiv.className = 'user-comment-profile';
@@ -422,7 +429,7 @@ function initializeFirebase() {
         postUserDisplayNameH2.textContent = postData.displayName;
         postDateH3.textContent = displayDate(postData.timestamp);
         postUserImg.src = postData.profilePicture;
-        postBodyP.textContent = replaceNewlinesWithBrTags(postData.body);
+        postBodyP.innerHTML = replaceNewlinesWithBrTags(postData.body);
 
         // Construct the post structure
         postDiv.appendChild(postHeaderDiv);
@@ -526,7 +533,7 @@ function initializeFirebase() {
     }
     
     function replaceNewlinesWithBrTags(inputString) {
-        return inputString.replace(/\n/g, "<br>")
+        return inputString.replace(/\n/g, "<br/>")
     }
 
     async function updatePost(postId, newBody) {
@@ -618,6 +625,33 @@ window.onload = function() {
     });
 };
 
- 
+let inactivityTimeout;
+
+    // Function to reset the inactivity timer
+function resetInactivityTimeout() {
+    // Clear the existing timeout
+     clearTimeout(inactivityTimeout);
+     if (auth.currentUser) {
+        // Set a new timeout for 15 minutes (900,000 milliseconds)
+        inactivityTimeout = setTimeout(() => {
+            // Sign out the user after 15 minutes of inactivity
+            signOut(auth).then(() => {
+                alert("You have been logged out due to inactivity.");
+                window.location.reload();
+            }).catch((error) => {
+                console.error("Error signing out:", error);
+            });
+        }, 900000); // 900000ms = 15 minutes
+    }   
+} 
+
+// Add event listeners to track user activity
+window.addEventListener('mousemove', resetInactivityTimeout);
+window.addEventListener('keydown', resetInactivityTimeout);
+window.addEventListener('click', resetInactivityTimeout);
+
+// Initialize the inactivity timeout when the page loads
+resetInactivityTimeout();
+
 // Listen for the custom event that signals components have been loaded
 document.addEventListener('componentsLoaded', initializeFirebase);
